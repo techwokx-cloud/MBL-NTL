@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Disallow admin/private areas (if applicable)
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.mbl-ntlsulnox.com/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1
