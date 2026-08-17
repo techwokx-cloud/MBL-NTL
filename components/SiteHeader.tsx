@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
 
 const navLinks = [
@@ -26,13 +25,11 @@ export function SiteHeader() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Image
+            <img
               src="/logo.png"
               alt="MBL-NTL SulNOx Fuel Conditioner"
-              width={220}
-              height={73}
-              priority
               className="h-14 w-auto"
+              loading="eager"
             />
           </Link>
 
