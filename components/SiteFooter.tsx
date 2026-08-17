@@ -115,6 +115,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/videos" className="hover:text-sulnox-green transition-colors">
+                  Videos
+                </Link>
+              </li>
+              <li>
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-sulnox-green transition-colors">
                   WhatsApp Support
                 </a>
