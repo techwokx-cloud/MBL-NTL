@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
@@ -6,7 +6,7 @@ export const runtime = 'nodejs';
  * GET /api/health
  * Health check endpoint for monitoring and load balancers
  */
-export async function GET(request: NextRequest): Promise<NextResponse> {
+export async function GET(): Promise<NextResponse> {
   try {
     const healthData = {
       status: 'healthy',
