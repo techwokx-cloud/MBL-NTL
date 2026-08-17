@@ -41,10 +41,12 @@ export default function Home() {
               </div>
               <div className="relative h-96 lg:h-full hidden lg:block">
                 <div className="absolute inset-0 bg-gradient-to-b from-sulnox-green/20 to-transparent rounded-2xl"></div>
-                {/* Placeholder for product image */}
-                <div className="w-full h-full bg-white/10 rounded-2xl flex items-center justify-center">
-                  <p className="text-gray-300">Product Image Here</p>
-                </div>
+                <img
+                  src="/images/products/all-product-display.jpg"
+                  alt="SulNOx Product Range"
+                  className="w-full h-full object-cover rounded-2xl shadow-2xl"
+                  loading="eager"
+                />
               </div>
             </div>
           </div>
@@ -66,6 +68,7 @@ export default function Home() {
                 description="Compact dosing solution for light commercial vehicles"
                 features={['Portable', 'Easy metering', 'Storage-friendly']}
                 link="/products/250ml"
+                imageUrl="/images/products/250 ml-Bottle..jpg"
               />
               <ProductCard
                 name="4.5L Container"
@@ -73,6 +76,7 @@ export default function Home() {
                 description="Standard container for fleet and industrial applications"
                 features={['High capacity', 'Cost-effective', 'Industrial grade']}
                 link="/products/4-5l"
+                imageUrl="/images/products/4.5 Litre Galon.jpg"
               />
             </div>
             <div className="text-center mt-12">
