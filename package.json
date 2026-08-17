@@ -1,7 +1,7 @@
 {
   "name": "mbl-ntl-sulnoxeco-ghana",
   "version": "1.0.0",
-  "description": "Customer-facing website for Mulberry Lane Ghana / Nationwide Technologies Ltd.",
+  "description": "Customer-facing website for MBL-NTL SulNOxEco Ghana.",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -13,8 +13,11 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "next": "^14.1.0",
+    "next": "^14.2.35",
     "typescript": "^5.3.3",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
     "tailwindcss": "^4.0.0",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.32",
@@ -23,10 +26,10 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "@types/node": "^20.10.6",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.1.0"
+    "eslint-config-next": "^14.2.35"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
