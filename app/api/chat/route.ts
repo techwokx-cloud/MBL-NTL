@@ -5,6 +5,7 @@ export const runtime = 'nodejs';
 interface ChatRequest {
   message: string;
   conversationId?: string;
+  history?: { role: 'user' | 'assistant'; content: string }[];
 }
 
 interface ChatResponse {
@@ -13,15 +14,32 @@ interface ChatResponse {
   timestamp: string;
 }
 
-/**
- * POST /api/chat
- * Handles AI assistant chat requests
- * Currently uses local logic; integrate with Anthropic API or selected LLM
- */
+const SYSTEM_PROMPT = `You are the SulNOx AI Sales Assistant for MBL-NTL SulNOxEco Ghana, the sole authorised
+distributor of SulNOxEco Fuel Conditioner in Ghana.
+
+FACTS ABOUT THE PRODUCT (do not deviate from these):
+- SulNOxEco is a 100% organic, biodegradable fuel conditioner blended directly into the fuel tank
+  (diesel, petrol or biofuel). It is NOT a urea/AdBlue/SCR exhaust additive and is not injected into
+  the exhaust stream.
+- It improves combustion, reduces fuel consumption, lowers emissions, cleans/protects the engine, and
+  requires no engine modification.
+- Available sizes: 30ml, 60ml, 120ml, 250ml, 1L, 4.5L, 25L.
+- Used across road transport, marine, rail, agriculture, mining, construction and generators.
+
+YOUR JOB:
+- Answer product questions using only the facts above.
+- Help the visitor pick the right pack size for their vehicle/application.
+- For exact dosing ratios, direct them to the Dosing Ratio page or official Product Data Sheet —
+  do not invent specific percentages or ratios.
+- For pricing, bulk orders, or anything you're unsure about, direct them to WhatsApp
+  (https://wa.me/233206769664) or the Support page.
+- Keep answers short (2-4 sentences), friendly, and sales-oriented without being pushy.
+- If asked something outside SulNOxEco/fuel conditioning, politely redirect to what you can help with.`;
+
 export async function POST(request: NextRequest): Promise<NextResponse<ChatResponse>> {
   try {
     const body: ChatRequest = await request.json();
-    const { message, conversationId } = body;
+    const { message, conversationId, history = [] } = body;
 
     if (!message || message.trim().length === 0) {
       return NextResponse.json(
@@ -30,24 +48,15 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       );
     }
 
-    // TODO: Connect to Anthropic API or selected LLM provider
-    // const apiKey = process.env.ANTHROPIC_API_KEY;
-    // const response = await fetch('https://api.anthropic.com/v1/messages', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'x-api-key': apiKey,
-    //   },
-    //   body: JSON.stringify({
-    //     model: 'claude-sonnet-4-6',
-    //     max_tokens: 1024,
-    //     messages: [{ role: 'user', content: message }],
-    //     system: SYSTEM_PROMPT,
-    //   }),
-    // });
+    const groqKey = process.env.GROQ_API_KEY;
+    let reply: string;
 
-    // For now, use local logic
-    const reply = generateLocalResponse(message);
+    if (groqKey) {
+      reply = await getGroqResponse(message, history, groqKey);
+    } else {
+      // Fallback while no GROQ_API_KEY is configured
+      reply = generateLocalResponse(message);
+    }
 
     return NextResponse.json(
       {
@@ -60,27 +69,65 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
   } catch (error) {
     console.error('Chat API error:', error);
     return NextResponse.json(
-      { reply: 'An error occurred. Please try again.', conversationId: '', timestamp: new Date().toISOString() },
+      { reply: "Sorry, something went wrong. Please try WhatsApp for immediate help: wa.me/233206769664", conversationId: '', timestamp: new Date().toISOString() },
       { status: 500 }
     );
   }
 }
 
 /**
- * Local response generator (placeholder)
- * Replace with actual LLM integration
+ * Groq API integration (OpenAI-compatible chat completions endpoint).
+ * Requires GROQ_API_KEY environment variable on Render.
+ * Model: llama-3.3-70b-versatile — fast inference, strong quality for this use case.
+ */
+async function getGroqResponse(
+  message: string,
+  history: { role: 'user' | 'assistant'; content: string }[],
+  apiKey: string
+): Promise<string> {
+  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...history.slice(-6), // keep last few turns for context
+        { role: 'user', content: message },
+      ],
+      max_tokens: 300,
+      temperature: 0.4,
+    }),
+  });
+
+  if (!response.ok) {
+    console.error('Groq API error:', response.status, await response.text());
+    return generateLocalResponse(message);
+  }
+
+  const data = await response.json();
+  return data.choices?.[0]?.message?.content?.trim() || generateLocalResponse(message);
+}
+
+/**
+ * Local fallback response generator — used only if GROQ_API_KEY is not set.
  */
 function generateLocalResponse(userInput: string): string {
   const input = userInput.toLowerCase();
 
   const responses: { [key: string]: string } = {
-    price: 'Our 250ml bottle is competitively priced for individual vehicles, while our 4.5L container offers better value for fleet operations. For exact pricing, contact our sales team.',
+    price: "For current pricing on any SulNOxEco size, message us on WhatsApp (wa.me/233206769664) and our sales team will help right away.",
     dosing:
-      'Most vehicles use a 3-8% dosing ratio depending on the engine and emission standard. Visit our Dosing Ratio page for a calculator.',
+      'Dosing depends on your fuel type and application. Check our Dosing Ratio page or the official Product Data Sheet on our Resources page for the exact recommended ratio.',
     order:
-      'You can order directly from our Shop page, or contact us via WhatsApp for bulk orders. We offer same-day delivery in Accra.',
-    delivery: 'We deliver same-day in Accra and within 2-3 business days to other regions.',
-    contact: 'Reach us via WhatsApp, email (support@mbl-ntlsulnox.com), or visit one of our branches.',
+      'You can order directly from our Shop page, or message us on WhatsApp for bulk/fleet orders.',
+    delivery: 'We deliver across Accra and major cities in Ghana — message us on WhatsApp to confirm delivery timing for your area.',
+    contact: 'Reach us via WhatsApp (wa.me/233206769664), email (info@mbl-ntlsulnox.com), or visit one of our branches.',
+    agent: "Interested in becoming a SulNOxEco sales agent? Visit our Become a Sales Agent page to apply.",
+    distributor: "Interested in becoming a SulNOxEco sales agent? Visit our Become a Sales Agent page to apply.",
   };
 
   for (const [keyword, response] of Object.entries(responses)) {
@@ -89,5 +136,5 @@ function generateLocalResponse(userInput: string): string {
     }
   }
 
-  return 'Thank you for your question! I can help with product info, dosing, ordering, and support. What would you like to know?';
+  return "Thanks for your question! I can help with product selection, dosing guidance, ordering and support. What would you like to know?";
 }

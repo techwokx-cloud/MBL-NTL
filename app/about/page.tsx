@@ -38,26 +38,37 @@ export default function About() {
 
         {/* Mission & Who We Are */}
         <section className="section-padding bg-white">
-          <div className="max-w-5xl mx-auto px-6 space-y-14">
+          <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start mb-14">
             <Reveal>
-              <h2 className="text-2xl sm:text-3xl font-bold text-ntl-navy mb-4">Our Mission</h2>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                To deliver a proven, organic fuel conditioning solution that helps vehicle owners, fleet operators
-                and industrial users reduce fuel costs, cut harmful emissions, and protect their engines — without
-                any modification or capital investment.
-              </p>
+              <img
+                src="/images/site/ntl-storefront.jpg"
+                alt="MBL-NTL SulNOxEco storefront in Ghana"
+                className="w-full h-auto rounded-2xl shadow-lg object-cover"
+              />
+              <p className="text-xs text-gray-500 mt-2 text-center">Our storefront in Ghana</p>
             </Reveal>
-
-            <Reveal delay={100}>
-              <h2 className="text-2xl sm:text-3xl font-bold text-ntl-navy mb-4">Who We Are</h2>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                Mulberry Lane Ghana (MBL) and Nationwide Technologies Ltd (NTL) have partnered as the sole
-                distributor of SulNOxEco™ Fuel Conditioner in Ghana. SulNOxEco is manufactured in the UK using
-                100% organic, biodegradable ingredients, and packaged and distributed locally to serve customers
-                across the country.
-              </p>
+            <Reveal delay={100} className="space-y-8">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-ntl-navy mb-4">Our Mission</h2>
+                <p className="text-gray-700 leading-relaxed">
+                  To deliver a proven, organic fuel conditioning solution that helps vehicle owners, fleet
+                  operators and industrial users reduce fuel costs, cut harmful emissions, and protect their
+                  engines — without any modification or capital investment.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-ntl-navy mb-4">Who We Are</h2>
+                <p className="text-gray-700 leading-relaxed">
+                  Mulberry Lane Ghana (MBL) and Nationwide Technologies Ltd (NTL) have partnered as the sole
+                  distributor of SulNOxEco™ Fuel Conditioner in Ghana. SulNOxEco is manufactured in the UK using
+                  100% organic, biodegradable ingredients, and packaged and distributed locally to serve
+                  customers across the country.
+                </p>
+              </div>
             </Reveal>
+          </div>
 
+          <div className="max-w-5xl mx-auto px-6">
             <Reveal delay={150}>
               <h2 className="text-2xl sm:text-3xl font-bold text-ntl-navy mb-6">What We Offer</h2>
               <div className="grid sm:grid-cols-2 gap-4">

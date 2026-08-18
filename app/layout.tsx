@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { AIAssistant } from '@/components/AIAssistant';
 
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'MBL-NTL SulNOxEco';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mbl-ntlsulnox.com';
@@ -98,9 +99,30 @@ export default function RootLayout({
         {/* Preconnect to external services */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        {/* Organization structured data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: siteName,
+              url: siteUrl,
+              logo: `${siteUrl}/logo.png`,
+              description:
+                'Sole authorised distributor of SulNOxEco Fuel Conditioner in Ghana.',
+              address: {
+                '@type': 'PostalAddress',
+                addressCountry: 'GH',
+              },
+              sameAs: [],
+            }),
+          }}
+        />
       </head>
       <body className="flex flex-col min-h-screen bg-white">
         {children}
+        <AIAssistant />
       </body>
     </html>
   );

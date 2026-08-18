@@ -1,14 +1,49 @@
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
-import { EngineExperience } from '@/components/EngineExperience';
 import { Reveal } from '@/components/Reveal';
-import { FaCheckCircle } from 'react-icons/fa';
+import { PistonComparison } from '@/components/PistonComparison';
+import {
+  HiOutlineBeaker,
+  HiOutlineSparkles,
+  HiOutlineShieldCheck,
+  HiOutlineFire,
+  HiOutlineCog,
+  HiOutlineTrendingUp,
+  HiOutlineLightningBolt,
+  HiOutlineCloud,
+  HiOutlineCurrencyDollar,
+} from 'react-icons/hi';
+import { FaWhatsapp, FaCheckCircle } from 'react-icons/fa';
 
 export const metadata: Metadata = {
   title: 'How It Works',
-  description: 'Understand how SulNOxEco Fuel Conditioner improves combustion and reduces emissions.',
+  description: 'See how SulNOxEco Fuel Conditioner improves combustion and reduces emissions, step by step.',
 };
+
+const steps = [
+  { number: 1, icon: HiOutlineBeaker, title: 'Add', desc: 'Add the recommended dose of SulNOxEco to your fuel.' },
+  { number: 2, icon: HiOutlineCog, title: 'Mix', desc: 'SulNOxEco mixes thoroughly with the fuel in the tank.' },
+  { number: 3, icon: HiOutlineShieldCheck, title: 'Clean & Protect', desc: 'It cleans injectors, combustion chambers and fuel system from deposits.' },
+  { number: 4, icon: HiOutlineFire, title: 'Improve Combustion', desc: 'Fuel burns more completely and efficiently for better performance.' },
+  { number: 5, icon: HiOutlineTrendingUp, title: 'Better Results', desc: 'Enjoy more power, lower emissions, less smoke and fuel savings.' },
+];
+
+const insideEngine = [
+  'Cleans injectors for better spray pattern',
+  'Removes carbon deposits from the combustion chamber',
+  'Reduces friction and wear',
+  'Lowers harmful exhaust emissions',
+  'Extends engine life',
+];
+
+const results = [
+  { icon: HiOutlineTrendingUp, label: 'Better Mileage', sub: 'More kilometres per litre of fuel' },
+  { icon: HiOutlineLightningBolt, label: 'More Power & Performance', sub: 'Smoother acceleration and response' },
+  { icon: HiOutlineCloud, label: 'Lower Emissions', sub: 'Reduced smoke, NOx, SOx and harmful gases' },
+  { icon: HiOutlineShieldCheck, label: 'Longer Engine Life', sub: 'Protects engine parts and reduces wear' },
+  { icon: HiOutlineCurrencyDollar, label: 'Cost Savings', sub: 'Save more on fuel and maintenance' },
+];
 
 export default function HowItWorks() {
   return (
@@ -16,104 +51,142 @@ export default function HowItWorks() {
       <SiteHeader />
       <main className="flex-grow">
         {/* Hero */}
-        <section className="bg-gradient-to-r from-ntl-navy to-ntl-blue text-white py-16 sm:py-20">
-          <div className="max-w-7xl mx-auto px-6">
+        <section className="relative overflow-hidden bg-gradient-to-br from-ntl-navy to-ntl-blue text-white py-16 sm:py-20">
+          <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-10 items-center">
             <Reveal>
-              <span className="text-sulnox-green font-semibold text-sm uppercase tracking-wide">The Science</span>
-              <h1 className="text-4xl sm:text-5xl font-bold mt-2 mb-4">How SulNOxEco Works</h1>
-              <p className="text-xl text-gray-200 max-w-2xl">
-                A 100% organic fuel conditioner that improves combustion in your existing engine &mdash; no
-                retrofits, no downtime.
+              <h1 className="text-4xl sm:text-5xl font-bold mb-4">
+                How It <span className="text-sulnox-green">Works</span>
+              </h1>
+              <p className="text-xl text-gray-200 mb-6">
+                SulNOxEco improves fuel quality and engine performance from the inside out.
               </p>
+              <p className="text-gray-300 mb-8">
+                Our organic formula works in harmony with your engine to deliver more power, lower emissions and
+                real savings — with no engine modification required.
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {[
+                  { icon: HiOutlineTrendingUp, label: 'Better Performance' },
+                  { icon: HiOutlineCloud, label: 'Lower Emissions' },
+                  { icon: HiOutlineCurrencyDollar, label: 'Fuel Savings' },
+                  { icon: HiOutlineShieldCheck, label: 'Engine Protection' },
+                ].map((f, i) => (
+                  <div key={i} className="flex flex-col items-center text-center gap-2">
+                    <f.icon className="w-7 h-7 text-sulnox-green" />
+                    <span className="text-xs font-medium text-gray-200">{f.label}</span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={150} className="hidden lg:block">
+              <img
+                src="/images/products/d38b1048-9bde-40bc-8543-4f85ba16fb84.jpg"
+                alt="SulNOxEco Fuel Conditioner"
+                className="w-full h-auto rounded-2xl shadow-2xl"
+              />
             </Reveal>
           </div>
         </section>
 
-        {/* Process */}
-        <EngineExperience />
-
-        {/* Technical Details */}
-        <section className="section-padding bg-ntl-slate">
+        {/* 5-Step Process */}
+        <section className="section-padding bg-white">
           <div className="max-w-7xl mx-auto px-6">
-            <Reveal>
-              <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy mb-12 text-center">Product Overview</h2>
-            </Reveal>
-            <div className="grid md:grid-cols-2 gap-12">
-              <Reveal className="bg-white rounded-xl p-8 shadow-sm">
-                <h3 className="text-xl font-bold text-ntl-navy mb-4">What SulNOxEco Is</h3>
-                <ul className="space-y-3 text-gray-700">
-                  {[
-                    '100% organic, biodegradable fuel conditioner',
-                    'Blends directly into diesel, petrol or biofuel',
-                    'Formulated in the UK, packaged and distributed in Ghana',
-                    'No engine modification or capital investment required',
-                  ].map((point, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5">
-                      <FaCheckCircle className="w-4 h-4 text-sulnox-green mt-1 shrink-0" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-              <Reveal delay={100} className="bg-white rounded-xl p-8 shadow-sm">
-                <h3 className="text-xl font-bold text-ntl-navy mb-4">Where It's Used</h3>
-                <ul className="space-y-3 text-gray-700">
-                  {[
-                    'Road transport, fleets and generators',
-                    'Marine engines and vessels',
-                    'Locomotives and rail operations',
-                    'Agriculture, mining and construction equipment',
-                  ].map((point, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5">
-                      <FaCheckCircle className="w-4 h-4 text-sulnox-green mt-1 shrink-0" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="section-padding">
-          <div className="max-w-4xl mx-auto px-6">
-            <Reveal>
-              <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy mb-12 text-center">
-                Frequently Asked Questions
+            <Reveal className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy">
+                The <span className="text-sulnox-green">5-Step</span> Process
               </h2>
             </Reveal>
-            <div className="space-y-4">
-              {[
-                {
-                  q: 'Is SulNOxEco safe to handle?',
-                  a: 'Yes. SulNOxEco is made from natural, biodegradable ingredients and is designed to be safe for regular handling. Standard workplace safety practices apply, as with any fuel additive.',
-                },
-                {
-                  q: 'How is SulNOxEco added to my vehicle?',
-                  a: 'SulNOxEco is measured and added directly into the fuel tank at the recommended dosing ratio for your fuel type and application. See our Dosing Ratio page for guidance.',
-                },
-                {
-                  q: 'Will it damage my engine or void my warranty?',
-                  a: 'No. SulNOxEco is compatible with all diesel, petrol and biofuel engines and works by improving fuel combustion, not by altering engine components.',
-                },
-                {
-                  q: 'What fuel types is it compatible with?',
-                  a: 'SulNOxEco is compatible with diesel, biofuels (including HVO) and petrol, across road, marine, rail and industrial applications.',
-                },
-              ].map((item, idx) => (
-                <Reveal key={idx} delay={idx * 60}>
-                  <details className="group border border-gray-200 rounded-lg p-6 cursor-pointer hover:border-sulnox-green/40 transition-colors bg-white">
-                    <summary className="flex items-center justify-between font-semibold text-ntl-navy list-none">
-                      <span>{item.q}</span>
-                      <span className="text-sulnox-green group-open:rotate-180 transition-transform">&#9660;</span>
-                    </summary>
-                    <p className="text-gray-700 mt-4">{item.a}</p>
-                  </details>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {steps.map((step, idx) => (
+                <Reveal key={idx} delay={idx * 80} className="relative">
+                  <div className="h-full bg-ntl-slate rounded-xl p-6 text-center border border-transparent hover:border-sulnox-green/30 transition-colors">
+                    <div className="w-10 h-10 mx-auto mb-4 rounded-full bg-sulnox-green text-white font-bold flex items-center justify-center">
+                      {step.number}
+                    </div>
+                    <step.icon className="w-8 h-8 text-ntl-blue mx-auto mb-3" />
+                    <h3 className="font-bold text-ntl-navy text-sm mb-2">{step.title}</h3>
+                    <p className="text-xs text-gray-600">{step.desc}</p>
+                  </div>
+                  {idx < steps.length - 1 && (
+                    <span className="hidden lg:block absolute top-1/2 -right-4 -translate-y-1/2 text-sulnox-green text-xl">
+                      &rarr;
+                    </span>
+                  )}
                 </Reveal>
               ))}
             </div>
           </div>
+        </section>
+
+        {/* Inside the Engine */}
+        <section className="section-padding bg-ntl-slate">
+          <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <Reveal>
+              <span className="text-sulnox-green font-semibold text-sm uppercase tracking-wide">Under the Hood</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy mt-2 mb-5">
+                What Happens Inside Your Engine?
+              </h2>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                SulNOxEco conditions the fuel at a molecular level, improving atomization and enhancing the
+                overall combustion process before it ever reaches the combustion chamber.
+              </p>
+              <ul className="space-y-3">
+                {insideEngine.map((point, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <FaCheckCircle className="w-4 h-4 text-sulnox-green mt-1 shrink-0" />
+                    <span className="text-gray-700">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={100}>
+              <PistonComparison />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Real Results */}
+        <section className="section-padding bg-ntl-navy text-white">
+          <div className="max-w-7xl mx-auto px-6">
+            <Reveal className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold">
+                Real <span className="text-sulnox-green">Results</span> You Can Feel
+              </h2>
+            </Reveal>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {results.map((r, idx) => (
+                <Reveal key={idx} delay={idx * 80} className="text-center bg-white/5 rounded-xl p-6 border border-white/10">
+                  <r.icon className="w-9 h-9 text-sulnox-green mx-auto mb-3" />
+                  <p className="font-bold text-sm mb-1">{r.label}</p>
+                  <p className="text-xs text-gray-300">{r.sub}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* AI Sales Agent CTA */}
+        <section className="bg-sulnox-green">
+          <Reveal className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4 text-white">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                <HiOutlineSparkles className="w-7 h-7" />
+              </div>
+              <div>
+                <p className="font-bold">Need help choosing the right dose?</p>
+                <p className="text-sm text-white/90">Chat with our AI Sales Agent now, or talk to our team on WhatsApp.</p>
+              </div>
+            </div>
+            <a
+              href="https://wa.me/233206769664?text=Hello%2C%20I%27d%20like%20help%20choosing%20a%20SulNOxEco%20dose"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white text-sulnox-green font-bold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors whitespace-nowrap"
+            >
+              <FaWhatsapp className="w-5 h-5" />
+              Chat on WhatsApp
+            </a>
+          </Reveal>
         </section>
       </main>
       <SiteFooter />

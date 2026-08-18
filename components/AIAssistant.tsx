@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { FaRobot, FaTimes, FaPaperPlane } from 'react-icons/fa';
+import { FaRobot, FaTimes, FaPaperPlane, FaWhatsapp } from 'react-icons/fa';
 
 interface Message {
   id: string;
@@ -10,12 +10,14 @@ interface Message {
   timestamp: Date;
 }
 
+const WHATSAPP_URL = 'https://wa.me/233206769664?text=Hello%2C%20I%20need%20help%20with%20SulNOxEco';
+
 export function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Hello! I\'m the SulNOx Assistant. How can I help you today? I can answer questions about products, dosing, ordering, and technical support.',
+      text: "Hi! I'm the SulNOx AI Sales Assistant. Ask me about products, dosing, or ordering — or I can connect you straight to our team on WhatsApp.",
       sender: 'assistant',
       timestamp: new Date(),
     },
@@ -24,19 +26,14 @@ export function AIAssistant() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || isLoading) return;
 
-    // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       text: input,
@@ -44,46 +41,44 @@ export function AIAssistant() {
       timestamp: new Date(),
     };
 
+    const history = messages.slice(-6).map((m) => ({
+      role: (m.sender === 'user' ? 'user' : 'assistant') as 'user' | 'assistant',
+      content: m.text,
+    }));
+
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
-    // Simulate AI response (replace with actual API call)
-    setTimeout(() => {
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: generateResponse(input),
-        sender: 'assistant',
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, assistantMessage]);
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage.text, history }),
+      });
+      const data = await res.json();
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          text: data.reply || "Sorry, I couldn't process that — try WhatsApp for immediate help.",
+          sender: 'assistant',
+          timestamp: new Date(),
+        },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          text: "Sorry, I'm having trouble connecting. Please reach us directly on WhatsApp.",
+          sender: 'assistant',
+          timestamp: new Date(),
+        },
+      ]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
-  };
-
-  const generateResponse = (userInput: string): string => {
-    const input = userInput.toLowerCase();
-
-    if (input.includes('price') || input.includes('cost')) {
-      return 'Our 250ml bottle is competitively priced for individual vehicles, while our 4.5L container offers better value for fleet operations. For exact pricing, please contact our sales team via WhatsApp.';
     }
-    if (input.includes('dosing')) {
-      return 'Most vehicles use a 3-8% dosing ratio depending on the engine and emission standard. Visit our Dosing Ratio page for a calculator, or tell me your vehicle details for a specific recommendation.';
-    }
-    if (input.includes('order') || input.includes('buy')) {
-      return 'You can order directly from our Shop page, or contact us via WhatsApp for bulk orders and wholesale pricing. We offer same-day delivery in Accra.';
-    }
-    if (input.includes('delivery')) {
-      return 'We deliver same-day in Accra and within 2-3 business days to other regions. Delivery is included with orders over a certain amount. Contact us for details.';
-    }
-    if (input.includes('technical') || input.includes('help')) {
-      return 'I can help with product information, dosing questions, ordering, and general support. For technical issues with your vehicle, please contact our support team.';
-    }
-    if (input.includes('contact')) {
-      return 'You can reach us via WhatsApp, email (support@mbl-ntlsulnox.com), or visit one of our branches. Our support team responds within 24 hours.';
-    }
-
-    return 'Thank you for your question! I can help with product information, dosing ratios, ordering, delivery, and general support. What would you like to know?';
   };
 
   return (
@@ -93,8 +88,8 @@ export function AIAssistant() {
         <button
           onClick={() => setIsOpen(true)}
           className="fixed bottom-6 right-6 z-40 w-16 h-16 rounded-full bg-gradient-to-br from-ntl-blue to-sulnox-green text-white shadow-2xl hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
-          aria-label="Open AI Assistant"
-          title="Chat with SulNOx Assistant"
+          aria-label="Open AI Sales Agent"
+          title="Chat with SulNOx AI Sales Agent"
         >
           <FaRobot className="w-8 h-8" />
         </button>
@@ -102,56 +97,49 @@ export function AIAssistant() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-32px)] bg-white rounded-lg shadow-2xl flex flex-col h-[500px] border-2 border-ntl-blue">
+        <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-32px)] bg-white rounded-xl shadow-2xl flex flex-col h-[520px] border border-gray-200">
           {/* Header */}
-          <div className="bg-gradient-to-r from-ntl-blue to-sulnox-green text-white p-4 rounded-t-lg flex items-center justify-between">
+          <div className="bg-gradient-to-r from-ntl-navy to-ntl-blue text-white p-4 rounded-t-xl flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <FaRobot className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
+                <FaRobot className="w-5 h-5 text-sulnox-green" />
+              </div>
               <div>
-                <p className="font-semibold">SulNOx Assistant</p>
-                <p className="text-xs text-gray-100">Always available</p>
+                <p className="font-semibold text-sm">SulNOx AI Sales Agent</p>
+                <p className="text-xs text-gray-300">Online now</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="hover:bg-white/20 p-1 rounded transition-colors"
+              className="hover:bg-white/20 p-1.5 rounded transition-colors"
               aria-label="Close chat"
             >
-              <FaTimes className="w-5 h-5" />
+              <FaTimes className="w-4 h-4" />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-ntl-slate">
             {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
+              <div key={message.id} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div
-                  className={`max-w-xs px-4 py-2 rounded-lg ${
+                  className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm ${
                     message.sender === 'user'
-                      ? 'bg-ntl-blue text-white rounded-br-none'
-                      : 'bg-ntl-slate text-gray-800 rounded-bl-none'
+                      ? 'bg-ntl-navy text-white rounded-br-sm'
+                      : 'bg-white text-gray-800 rounded-bl-sm shadow-sm'
                   }`}
                 >
-                  <p className="text-sm">{message.text}</p>
-                  <p className="text-xs mt-1 opacity-70">
-                    {message.timestamp.toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </p>
+                  <p>{message.text}</p>
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-ntl-slate text-gray-800 px-4 py-2 rounded-lg rounded-bl-none">
+                <div className="bg-white px-4 py-3 rounded-2xl rounded-bl-sm shadow-sm">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
                   </div>
                 </div>
               </div>
@@ -159,21 +147,32 @@ export function AIAssistant() {
             <div ref={messagesEndRef} />
           </div>
 
+          {/* WhatsApp handoff */}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 bg-sulnox-green hover:bg-sulnox-green/90 text-white text-xs font-semibold py-2 transition-colors"
+          >
+            <FaWhatsapp className="w-3.5 h-3.5" />
+            Prefer to talk to a person? Chat on WhatsApp
+          </a>
+
           {/* Input */}
-          <form onSubmit={handleSendMessage} className="border-t border-gray-200 p-4 bg-white rounded-b-lg">
+          <form onSubmit={handleSendMessage} className="border-t border-gray-200 p-3 bg-white rounded-b-xl">
             <div className="flex gap-2">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask me anything..."
-                className="input-field text-sm flex-1"
+                placeholder="Ask about products, dosing, orders..."
+                className="input-field text-sm flex-1 py-2"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-sulnox-green hover:bg-ntl-blue text-white p-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-ntl-navy hover:bg-ntl-blue text-white p-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Send message"
               >
                 <FaPaperPlane className="w-4 h-4" />
