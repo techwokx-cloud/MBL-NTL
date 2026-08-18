@@ -70,7 +70,7 @@ export default function Product45L() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Standard</p>
-                    <p className="font-semibold text-ntl-navy">ISO 22241 / ASTM D6427</p>
+                    <p className="font-semibold text-ntl-navy">100% Organic &amp; Biodegradable</p>
                   </div>
                 </div>
 

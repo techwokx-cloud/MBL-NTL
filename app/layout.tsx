@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     'Advanced emission control technology for automotive and industrial applications across West Africa.',
   keywords: [
     'emission control',
-    'SCR',
+    'fuel conditioner',
     'SulNOx',
     'automotive',
     'Ghana',

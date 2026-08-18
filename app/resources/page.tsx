@@ -37,8 +37,8 @@ export default function Resources() {
                     >
                       <span className="text-sulnox-green text-2xl">📄</span>
                       <div>
-                        <p className="font-semibold text-ntl-navy">SulNOx Product Specification Sheet</p>
-                        <p className="text-xs text-gray-600">ISO 22241 certified datasheet</p>
+                        <p className="font-semibold text-ntl-navy">SulNOxEco Product Data Sheet</p>
+                        <p className="text-xs text-gray-600">Specifications & dosing reference</p>
                       </div>
                     </a>
                   </li>
@@ -49,8 +49,8 @@ export default function Resources() {
                     >
                       <span className="text-sulnox-green text-2xl">📄</span>
                       <div>
-                        <p className="font-semibold text-ntl-navy">SCR System Installation Guide</p>
-                        <p className="text-xs text-gray-600">Step-by-step installation & maintenance</p>
+                        <p className="font-semibold text-ntl-navy">Dosing & Application Guide</p>
+                        <p className="text-xs text-gray-600">Step-by-step dosing & usage guidance</p>
                       </div>
                     </a>
                   </li>
@@ -154,11 +154,11 @@ export default function Resources() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-sulnox-green font-bold text-lg">✓</span>
-                  <span className="text-gray-700"><strong>ISO 22241</strong> – International standard</span>
+                  <span className="text-gray-700"><strong>100% Organic</strong> – Biodegradable formulation</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-sulnox-green font-bold text-lg">✓</span>
-                  <span className="text-gray-700"><strong>ASTM D6427</strong> – American standard</span>
+                  <span className="text-gray-700"><strong>Universal Compatibility</strong> – Diesel, biofuel & petrol</span>
                 </div>
               </div>
             </div>

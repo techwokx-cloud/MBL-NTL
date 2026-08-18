@@ -92,7 +92,8 @@ export default function Terms() {
 
             <h3 className="text-2xl font-bold text-ntl-navy mt-8 mb-4">9. Product Warranty</h3>
             <p className="text-gray-700 mb-6">
-              All SulNOx products are ISO 22241 certified and meet or exceed international emission standards (Euro 6, BS
+              All SulNOxEco products are manufactured from 100% organic, biodegradable ingredients and support
+              compliance with international emission standards (Euro 6, BS
               VI, ASTM D6427). Products are supplied as-is. For defects, contact our support team within 14 days of purchase.
             </p>
 

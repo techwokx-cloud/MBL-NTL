@@ -70,7 +70,7 @@ export default function Product250ml() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Standard</p>
-                    <p className="font-semibold text-ntl-navy">ISO 22241 / ASTM D6427</p>
+                    <p className="font-semibold text-ntl-navy">100% Organic &amp; Biodegradable</p>
                   </div>
                 </div>
 
@@ -88,7 +88,7 @@ export default function Product250ml() {
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-sulnox-green font-bold text-xl">✓</span>
-                      <span className="text-gray-700">High-purity aqueous urea formulation</span>
+                      <span className="text-gray-700">Blends directly into the fuel tank — no engine changes needed</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-sulnox-green font-bold text-xl">✓</span>

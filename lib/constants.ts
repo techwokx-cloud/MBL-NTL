@@ -95,7 +95,7 @@ export const FOOTER_LINKS = {
     { label: 'About', href: '/about' },
     { label: 'How It Works', href: '/how-it-works' },
     { label: 'Branches', href: '/branches' },
-    { label: 'Distributors', href: '/distributors' },
+    { label: 'Become a Sales Agent', href: '/become-a-sales-agent' },
   ],
   support: [
     { label: 'Help Center', href: '/support' },
