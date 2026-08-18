@@ -23,12 +23,12 @@ export function ProductCard({
   return (
     <div className="group rounded-xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
       {/* Image Section */}
-      <div className="relative h-64 bg-gradient-to-br from-ntl-blue/10 to-sulnox-green/10 overflow-hidden">
+      <div className="relative h-64 bg-white overflow-hidden flex items-center justify-center p-6">
         {imageUrl ? (
           <img
             src={imageUrl}
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
