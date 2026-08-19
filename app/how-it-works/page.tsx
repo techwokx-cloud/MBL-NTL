@@ -3,6 +3,7 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { Reveal } from '@/components/Reveal';
 import { PistonComparison } from '@/components/PistonComparison';
+import { EngineSchematic } from '@/components/EngineSchematic';
 import {
   HiOutlineBeaker,
   HiOutlineSparkles,
@@ -50,40 +51,59 @@ export default function HowItWorks() {
     <>
       <SiteHeader />
       <main className="flex-grow">
-        {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-ntl-navy to-ntl-blue text-white py-16 sm:py-20">
-          <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-10 items-center">
-            <Reveal>
-              <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-                How It <span className="text-sulnox-green">Works</span>
-              </h1>
-              <p className="text-xl text-gray-200 mb-6">
-                SulNOxEco improves fuel quality and engine performance from the inside out.
-              </p>
-              <p className="text-gray-300 mb-8">
-                Our organic formula works in harmony with your engine to deliver more power, lower emissions and
-                real savings — with no engine modification required.
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {[
-                  { icon: HiOutlineTrendingUp, label: 'Better Performance' },
-                  { icon: HiOutlineCloud, label: 'Lower Emissions' },
-                  { icon: HiOutlineCurrencyDollar, label: 'Fuel Savings' },
-                  { icon: HiOutlineShieldCheck, label: 'Engine Protection' },
-                ].map((f, i) => (
-                  <div key={i} className="flex flex-col items-center text-center gap-2">
-                    <f.icon className="w-7 h-7 text-sulnox-green" />
-                    <span className="text-xs font-medium text-gray-200">{f.label}</span>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-            <Reveal delay={150} className="hidden lg:block">
-              <img
-                src="/images/products/d38b1048-9bde-40bc-8543-4f85ba16fb84.jpg"
-                alt="SulNOxEco Fuel Conditioner"
-                className="w-full h-auto rounded-2xl shadow-2xl"
-              />
+        {/* Hero - matches approved mockup: icon list left, engine visual right, feature strip bottom */}
+        <section className="relative overflow-hidden bg-ntl-slate py-16 sm:py-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-14">
+              <Reveal>
+                <h1 className="text-3xl sm:text-4xl font-bold text-ntl-navy mb-2">
+                  How SulNOxEco Works
+                </h1>
+                <p className="text-xl text-ntl-blue font-semibold mb-5">Inside Your Engine</p>
+                <p className="text-gray-600 mb-8 max-w-md">
+                  SulNOxEco conditions the fuel, improves combustion and keeps your engine clean for optimal
+                  performance.
+                </p>
+
+                <div className="space-y-5">
+                  {[
+                    { icon: HiOutlineBeaker, title: 'Fuel Intake', desc: 'Fuel enters the system' },
+                    { icon: HiOutlineCog, title: 'Fuel Conditioning', desc: 'SulNOxEco blends with fuel' },
+                    { icon: HiOutlineFire, title: 'Improved Combustion', desc: 'Better burn, more power, less waste' },
+                    { icon: HiOutlineSparkles, title: 'Cleaner Engine', desc: 'Less deposits, longer engine life' },
+                    { icon: HiOutlineShieldCheck, title: 'Engine Protection', desc: 'Longer life, lower maintenance' },
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-ntl-navy flex items-center justify-center shrink-0">
+                        <item.icon className="w-5 h-5 text-sulnox-green" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-ntl-navy">{item.title}</p>
+                        <p className="text-sm text-gray-600">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+
+              <Reveal delay={150} className="hidden lg:block h-[420px]">
+                <EngineSchematic />
+              </Reveal>
+            </div>
+
+            {/* Bottom feature strip */}
+            <Reveal delay={200} className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-gray-300">
+              {[
+                { icon: HiOutlineCurrencyDollar, label: 'Lower Fuel Costs' },
+                { icon: HiOutlineCloud, label: 'Reduce Emissions' },
+                { icon: HiOutlineTrendingUp, label: 'Better Performance' },
+                { icon: HiOutlineShieldCheck, label: 'Engine Protection' },
+              ].map((f, i) => (
+                <div key={i} className="flex items-center gap-2.5 justify-center sm:justify-start">
+                  <f.icon className="w-6 h-6 text-ntl-navy shrink-0" />
+                  <span className="text-sm font-medium text-ntl-navy">{f.label}</span>
+                </div>
+              ))}
             </Reveal>
           </div>
         </section>
