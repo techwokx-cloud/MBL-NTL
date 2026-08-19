@@ -11,8 +11,13 @@ import {
   HiOutlineSparkles,
   HiOutlineBeaker,
   HiOutlineChip,
+  HiOutlineTruck,
+  HiOutlineFire,
+  HiOutlineLightningBolt,
+  HiOutlineOfficeBuilding,
 } from 'react-icons/hi';
-import { FaWhatsapp, FaCheckCircle } from 'react-icons/fa';
+import { GiFarmTractor, GiMining, GiSteamLocomotive } from 'react-icons/gi';
+import { FaWhatsapp, FaCheckCircle, FaShip } from 'react-icons/fa';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -39,6 +44,17 @@ const whyChoose = [
   { icon: HiOutlineBeaker, title: 'Cleans & Protects', desc: 'Removes deposits and prevents future build-up' },
   { icon: HiOutlineCloud, title: 'Lower Emissions', desc: 'Reduces harmful exhaust emissions' },
   { icon: HiOutlineShieldCheck, title: 'Extends Engine Life', desc: 'Keeps your engine cleaner and running longer' },
+];
+
+const industries = [
+  { icon: HiOutlineTruck, label: 'Logistics & Freight' },
+  { icon: GiFarmTractor, label: 'Agriculture' },
+  { icon: HiOutlineFire, label: 'Fuel Retail' },
+  { icon: HiOutlineOfficeBuilding, label: 'Fuel Storage' },
+  { icon: HiOutlineLightningBolt, label: 'Generators' },
+  { icon: GiSteamLocomotive, label: 'Locomotives' },
+  { icon: FaShip, label: 'Marine' },
+  { icon: GiMining, label: 'Mining & Construction' },
 ];
 
 export default function Home() {
@@ -108,6 +124,28 @@ export default function Home() {
                     <p className="text-gray-400 text-xs hidden sm:block">{item.sub}</p>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Industries We Serve */}
+        <section className="section-padding bg-white">
+          <div className="max-w-7xl mx-auto px-6">
+            <Reveal className="text-center mb-14">
+              <span className="text-sulnox-green font-semibold text-sm uppercase tracking-wide">Where We're Used</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy mt-2 mb-3">Industries We Serve</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                One solution, multiple applications — SulNOxEco is trusted across sectors that depend on
+                reliable, efficient fuel performance.
+              </p>
+            </Reveal>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+              {industries.map((item, idx) => (
+                <Reveal key={idx} delay={idx * 60} className="text-center bg-ntl-slate rounded-xl p-6 hover:shadow-md transition-shadow">
+                  <item.icon className="w-9 h-9 text-sulnox-green mx-auto mb-3" />
+                  <p className="text-sm font-semibold text-ntl-navy">{item.label}</p>
+                </Reveal>
               ))}
             </div>
           </div>
