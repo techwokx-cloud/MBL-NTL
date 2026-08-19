@@ -20,6 +20,7 @@ const navLinks = [
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Products', href: '/products' },
   { label: 'Dosing Ratio', href: '/dosing-ratio' },
+  { label: 'Savings Calculator', href: '/savings-calculator' },
   { label: 'Shop', href: '/shop' },
   { label: 'Branches', href: '/branches' },
   { label: 'Support', href: '/support' },

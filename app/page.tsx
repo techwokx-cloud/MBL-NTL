@@ -3,14 +3,15 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { EngineExperience } from '@/components/EngineExperience';
 import { Reveal } from '@/components/Reveal';
+import { HeroSlideshow } from '@/components/HeroSlideshow';
+import { AISalesAgentIntro } from '@/components/AISalesAgentIntro';
 import {
   HiOutlineCurrencyDollar,
   HiOutlineCloud,
   HiOutlineShieldCheck,
   HiOutlineTrendingUp,
-  HiOutlineSparkles,
-  HiOutlineBeaker,
   HiOutlineChip,
+  HiOutlineBeaker,
   HiOutlineTruck,
   HiOutlineFire,
   HiOutlineLightningBolt,
@@ -26,17 +27,16 @@ export const metadata: Metadata = {
 };
 
 const heroFeatures = [
-  { icon: HiOutlineCurrencyDollar, label: 'Lower Fuel Costs' },
+  { icon: HiOutlineTrendingUp, label: 'Improve Fuel Efficiency' },
   { icon: HiOutlineCloud, label: 'Reduce Emissions' },
   { icon: HiOutlineShieldCheck, label: 'Protect Your Engine' },
-  { icon: HiOutlineTrendingUp, label: 'Better Engine Performance' },
 ];
 
 const trustStrip = [
-  { icon: HiOutlineSparkles, label: '100% Organic', sub: 'Advanced fuel conditioning' },
-  { icon: HiOutlineChip, label: 'Proven Technology', sub: 'Tested for real performance' },
-  { icon: HiOutlineCurrencyDollar, label: 'Lower Operating Costs', sub: 'Save more on every litre' },
-  { icon: HiOutlineCloud, label: 'Cleaner Environment', sub: 'Lower harmful emissions' },
+  { icon: HiOutlineChip, label: 'Proven Technology', sub: 'Advanced fuel conditioning for better performance' },
+  { icon: HiOutlineCurrencyDollar, label: 'Lower Operating Costs', sub: 'Save more on fuel every single day' },
+  { icon: HiOutlineCloud, label: 'Cleaner Environment', sub: 'Lower harmful emissions for a greener future' },
+  { icon: HiOutlineShieldCheck, label: 'Longer Engine Life', sub: 'Reduces wear & maintenance for maximum reliability' },
 ];
 
 const whyChoose = [
@@ -65,56 +65,55 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-ntl-navy via-ntl-navy to-ntl-blue text-white">
-          <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_20%_20%,white,transparent_35%),radial-gradient(circle_at_80%_60%,white,transparent_35%)]" />
-          <div className="relative max-w-7xl mx-auto px-6 py-16 sm:py-20 lg:py-24">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <section className="relative overflow-hidden bg-ntl-navy text-white min-h-[640px] flex items-center">
+          <HeroSlideshow />
+          <div className="relative max-w-7xl mx-auto px-6 py-16 sm:py-20 lg:py-24 w-full">
+            <div className="max-w-2xl">
               <Reveal>
-                <span className="inline-block bg-sulnox-green/20 text-sulnox-green font-semibold text-xs tracking-wide uppercase px-3 py-1 rounded-full mb-5">
-                  Made in Ghana &middot; UK Formulated
-                </span>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.05]">
                   Make Every Drop <br className="hidden sm:block" />
                   of Fuel <span className="text-sulnox-green">Work Harder</span>
                 </h1>
-                <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-xl">
+                <p className="text-lg text-gray-200 mb-6 leading-relaxed max-w-xl">
                   SulNOxEco™ Fuel Conditioner optimizes combustion, reduces fuel consumption, lowers
                   emissions and protects your engine for the long term.
                 </p>
 
-                <div className="grid grid-cols-2 gap-4 mb-8 max-w-md">
+                <div className="inline-flex items-center gap-3 border border-sulnox-green/50 bg-black/30 rounded-lg px-4 py-3 mb-8">
+                  <span className="text-xl">🇬🇧</span>
+                  <span className="text-sm font-medium text-gray-100">
+                    It is produced in the UK. Package and distribute in Ghana.
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 mb-8 max-w-lg">
                   {heroFeatures.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2.5">
-                      <f.icon className="w-6 h-6 text-sulnox-green shrink-0" />
-                      <span className="text-sm font-medium text-gray-100">{f.label}</span>
+                    <div key={i} className="flex flex-col items-start gap-2">
+                      <f.icon className="w-7 h-7 text-sulnox-green shrink-0" />
+                      <span className="text-sm font-medium text-gray-100 leading-tight">{f.label}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="flex flex-wrap gap-4">
-                  <a href="/how-it-works" className="btn-primary bg-ntl-blue hover:bg-ntl-blue/90">
+                <div className="flex flex-wrap gap-4 mb-6">
+                  <a href="/how-it-works" className="btn-primary bg-sulnox-green hover:bg-sulnox-green/90">
                     See How It Works
                   </a>
-                  <a href="/shop" className="btn-primary bg-sulnox-green hover:bg-sulnox-green/90">
-                    Explore Products
+                  <a href="/savings-calculator" className="btn-secondary border-white text-white hover:bg-white hover:text-ntl-navy">
+                    Calculate Your Savings
                   </a>
                 </div>
-              </Reveal>
 
-              <Reveal delay={150} className="relative h-80 sm:h-96 lg:h-[480px] hidden lg:block">
-                <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,168,107,0.12),transparent_70%)] rounded-3xl" />
-                <img
-                  src="/images/products/all-product-display.jpg"
-                  alt="SulNOxEco Product Range"
-                  className="w-full h-full object-contain drop-shadow-2xl"
-                  loading="eager"
-                />
+                <p className="flex items-center gap-2 text-sm text-gray-300">
+                  <HiOutlineShieldCheck className="w-5 h-5 text-sulnox-green" />
+                  Trusted by drivers, businesses &amp; industries across Ghana
+                </p>
               </Reveal>
             </div>
           </div>
 
           {/* Trust strip */}
-          <div className="relative border-t border-white/10 bg-black/10">
+          <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/40 backdrop-blur-sm">
             <div className="max-w-7xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-6">
               {trustStrip.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3">
@@ -128,6 +127,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Meet SulNOx AI */}
+        <AISalesAgentIntro />
 
         {/* Industries We Serve */}
         <section className="section-padding bg-white">
