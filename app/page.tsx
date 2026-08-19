@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { EngineExperience } from '@/components/EngineExperience';
-import { ProductCard } from '@/components/ProductCard';
 import { Reveal } from '@/components/Reveal';
 import {
   HiOutlineCurrencyDollar,
@@ -111,46 +110,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* Featured Products */}
-        <section className="section-padding bg-ntl-slate">
-          <div className="max-w-7xl mx-auto px-6">
-            <Reveal className="text-center mb-14">
-              <span className="text-sulnox-green font-semibold text-sm uppercase tracking-wide">Our Product Range</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy mt-2 mb-4">Precision-Engineered Solutions</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                High-performance fuel conditioners that clean, protect and optimize your engine for every application.
-              </p>
-            </Reveal>
-            <div className="grid md:grid-cols-2 gap-8">
-              <Reveal>
-                <ProductCard
-                  name="250ml Bottle"
-                  sku="250ML"
-                  description="Compact dosing solution for light commercial vehicles"
-                  features={['Portable', 'Easy metering', 'Storage-friendly']}
-                  link="/products/250ml"
-                  imageUrl="/images/products/250 ml-Bottle..jpg"
-                />
-              </Reveal>
-              <Reveal delay={100}>
-                <ProductCard
-                  name="4.5L Container"
-                  sku="4.5L"
-                  description="Standard container for fleet and industrial applications"
-                  features={['High capacity', 'Cost-effective', 'Industrial grade']}
-                  link="/products/4-5l"
-                  imageUrl="/images/products/4.5 Litre Galon.jpg"
-                />
-              </Reveal>
-            </div>
-            <Reveal className="text-center mt-12">
-              <a href="/shop" className="btn-secondary">
-                View All Products
-              </a>
-            </Reveal>
           </div>
         </section>
 
