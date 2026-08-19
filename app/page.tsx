@@ -13,12 +13,10 @@ import {
   HiOutlineChip,
   HiOutlineBeaker,
   HiOutlineTruck,
-  HiOutlineFire,
   HiOutlineLightningBolt,
-  HiOutlineOfficeBuilding,
 } from 'react-icons/hi';
-import { GiFarmTractor, GiMining, GiSteamLocomotive } from 'react-icons/gi';
-import { FaWhatsapp, FaCheckCircle, FaShip } from 'react-icons/fa';
+import { GiFarmTractor, GiCrane, GiFactory } from 'react-icons/gi';
+import { FaWhatsapp, FaCheckCircle, FaShip, FaCar, FaMapMarkerAlt, FaHandshake, FaBoxes } from 'react-icons/fa';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -46,15 +44,46 @@ const whyChoose = [
   { icon: HiOutlineShieldCheck, title: 'Extends Engine Life', desc: 'Keeps your engine cleaner and running longer' },
 ];
 
-const industries = [
-  { icon: HiOutlineTruck, label: 'Logistics & Freight' },
-  { icon: GiFarmTractor, label: 'Agriculture' },
-  { icon: HiOutlineFire, label: 'Fuel Retail' },
-  { icon: HiOutlineOfficeBuilding, label: 'Fuel Storage' },
+const applications = [
+  { icon: FaCar, label: 'Cars & SUVs' },
+  { icon: HiOutlineTruck, label: 'Trucks & Buses' },
   { icon: HiOutlineLightningBolt, label: 'Generators' },
-  { icon: GiSteamLocomotive, label: 'Locomotives' },
+  { icon: GiCrane, label: 'Construction' },
+  { icon: GiFarmTractor, label: 'Agriculture' },
   { icon: FaShip, label: 'Marine' },
-  { icon: GiMining, label: 'Mining & Construction' },
+  { icon: GiFactory, label: 'Industrial' },
+];
+
+const ctaStrip = [
+  {
+    icon: FaWhatsapp,
+    label: 'Talk to Sales',
+    sub: 'Chat with our sales team on WhatsApp',
+    href: 'https://wa.me/233206769664?text=Hello%20MBL-NTL%20SulNOxEco',
+    external: true,
+    color: 'bg-sulnox-green hover:bg-sulnox-green/90',
+  },
+  {
+    icon: FaMapMarkerAlt,
+    label: 'Find an Outlet',
+    sub: 'Locate SulNOxEco near you',
+    href: '/branches',
+    color: 'bg-ntl-blue hover:bg-ntl-blue/90',
+  },
+  {
+    icon: FaHandshake,
+    label: 'Become a Sales Agent',
+    sub: 'Join our growing network across Ghana',
+    href: '/become-a-sales-agent',
+    color: 'bg-rose-600 hover:bg-rose-600/90',
+  },
+  {
+    icon: FaBoxes,
+    label: 'Bulk / Fleet Enquiry',
+    sub: 'Special pricing for businesses and fleets',
+    href: '/shop',
+    color: 'bg-ntl-navy hover:bg-ntl-navy/90',
+  },
 ];
 
 export default function Home() {
@@ -131,19 +160,18 @@ export default function Home() {
         {/* Meet SulNOx AI */}
         <AISalesAgentIntro />
 
-        {/* Industries We Serve */}
+        {/* Applications */}
         <section className="section-padding bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <Reveal className="text-center mb-14">
-              <span className="text-sulnox-green font-semibold text-sm uppercase tracking-wide">Where We're Used</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy mt-2 mb-3">Industries We Serve</h2>
+              <span className="text-sulnox-green font-semibold text-sm uppercase tracking-wide">One Solution, Multiple Applications</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy mt-2 mb-3">Where SulNOxEco Is Used</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                One solution, multiple applications — SulNOxEco is trusted across sectors that depend on
-                reliable, efficient fuel performance.
+                SulNOxEco is suitable for a wide range of engines and industries.
               </p>
             </Reveal>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-              {industries.map((item, idx) => (
+              {applications.map((item, idx) => (
                 <Reveal key={idx} delay={idx * 60} className="text-center bg-ntl-slate rounded-xl p-6 hover:shadow-md transition-shadow">
                   <item.icon className="w-9 h-9 text-sulnox-green mx-auto mb-3" />
                   <p className="text-sm font-semibold text-ntl-navy">{item.label}</p>
@@ -151,6 +179,25 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </section>
+
+        {/* CTA Strip */}
+        <section className="grid sm:grid-cols-2 lg:grid-cols-4">
+          {ctaStrip.map((item, idx) => (
+            <a
+              key={idx}
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+              className={`${item.color} text-white p-6 flex items-center gap-4 transition-colors`}
+            >
+              <item.icon className="w-8 h-8 shrink-0" />
+              <div>
+                <p className="font-bold text-sm">{item.label}</p>
+                <p className="text-xs text-white/80">{item.sub}</p>
+              </div>
+            </a>
+          ))}
         </section>
 
         {/* Why Choose */}
