@@ -3,7 +3,6 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { Reveal } from '@/components/Reveal';
 import { PistonComparison } from '@/components/PistonComparison';
-import { EngineSchematic } from '@/components/EngineSchematic';
 import {
   HiOutlineBeaker,
   HiOutlineSparkles,
@@ -87,7 +86,19 @@ export default function HowItWorks() {
               </Reveal>
 
               <Reveal delay={150} className="hidden lg:block h-[420px]">
-                <EngineSchematic />
+                <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl bg-black">
+                  <video
+                    src="/videos/engine-piston-cycle.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                  <span className="absolute bottom-2 right-3 text-[10px] text-white/60 bg-black/40 px-2 py-0.5 rounded">
+                    Footage: Vecteezy
+                  </span>
+                </div>
               </Reveal>
             </div>
 

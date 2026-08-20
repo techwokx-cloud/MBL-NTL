@@ -15,7 +15,7 @@ import {
   HiOutlineTruck,
   HiOutlineLightningBolt,
 } from 'react-icons/hi';
-import { GiFarmTractor, GiCrane, GiFactory } from 'react-icons/gi';
+import { GiFarmTractor, GiCrane, GiFactory, GiMining } from 'react-icons/gi';
 import { FaWhatsapp, FaCheckCircle, FaShip, FaCar, FaMapMarkerAlt, FaHandshake, FaBoxes } from 'react-icons/fa';
 
 export const metadata: Metadata = {
@@ -45,13 +45,14 @@ const whyChoose = [
 ];
 
 const applications = [
-  { icon: FaCar, label: 'Cars & SUVs' },
-  { icon: HiOutlineTruck, label: 'Trucks & Buses' },
-  { icon: HiOutlineLightningBolt, label: 'Generators' },
-  { icon: GiCrane, label: 'Construction' },
-  { icon: GiFarmTractor, label: 'Agriculture' },
-  { icon: FaShip, label: 'Marine' },
-  { icon: GiFactory, label: 'Industrial' },
+  { icon: FaCar, label: 'Cars & SUVs', color: 'bg-blue-50 text-blue-600' },
+  { icon: HiOutlineTruck, label: 'Trucks & Buses', color: 'bg-amber-50 text-amber-600' },
+  { icon: HiOutlineLightningBolt, label: 'Generators', color: 'bg-yellow-50 text-yellow-600' },
+  { icon: GiCrane, label: 'Construction', color: 'bg-orange-50 text-orange-600' },
+  { icon: GiFarmTractor, label: 'Agriculture', color: 'bg-lime-50 text-lime-700' },
+  { icon: FaShip, label: 'Marine', color: 'bg-cyan-50 text-cyan-600' },
+  { icon: GiFactory, label: 'Industrial', color: 'bg-slate-100 text-slate-600' },
+  { icon: GiMining, label: 'Mining', color: 'bg-stone-100 text-stone-600' },
 ];
 
 const ctaStrip = [
@@ -94,23 +95,23 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-ntl-navy text-white min-h-[640px] flex items-center">
+        <section className="relative overflow-hidden bg-white text-ntl-navy min-h-[640px] flex items-center">
           <HeroSlideshow />
           <div className="relative max-w-7xl mx-auto px-6 py-16 sm:py-20 lg:py-24 w-full">
             <div className="max-w-2xl">
               <Reveal>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.05]">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.05] text-ntl-navy">
                   Make Every Drop <br className="hidden sm:block" />
                   of Fuel <span className="text-sulnox-green">Work Harder</span>
                 </h1>
-                <p className="text-lg text-gray-200 mb-6 leading-relaxed max-w-xl">
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed max-w-xl">
                   SulNOxEco™ Fuel Conditioner optimizes combustion, reduces fuel consumption, lowers
                   emissions and protects your engine for the long term.
                 </p>
 
-                <div className="inline-flex items-center gap-3 border border-sulnox-green/50 bg-black/30 rounded-lg px-4 py-3 mb-8">
+                <div className="inline-flex items-center gap-3 border border-ntl-blue/30 bg-white/90 shadow-sm rounded-lg px-4 py-3 mb-8">
                   <span className="text-xl">🇬🇧</span>
-                  <span className="text-sm font-medium text-gray-100">
+                  <span className="text-sm font-medium text-ntl-navy">
                     It is produced in the UK. Package and distribute in Ghana.
                   </span>
                 </div>
@@ -119,7 +120,7 @@ export default function Home() {
                   {heroFeatures.map((f, i) => (
                     <div key={i} className="flex flex-col items-start gap-2">
                       <f.icon className="w-7 h-7 text-sulnox-green shrink-0" />
-                      <span className="text-sm font-medium text-gray-100 leading-tight">{f.label}</span>
+                      <span className="text-sm font-semibold text-ntl-navy leading-tight">{f.label}</span>
                     </div>
                   ))}
                 </div>
@@ -128,12 +129,12 @@ export default function Home() {
                   <a href="/how-it-works" className="btn-primary bg-sulnox-green hover:bg-sulnox-green/90">
                     See How It Works
                   </a>
-                  <a href="/savings-calculator" className="btn-secondary border-white text-white hover:bg-white hover:text-ntl-navy">
+                  <a href="/savings-calculator" className="btn-secondary border-ntl-navy text-ntl-navy hover:bg-ntl-navy hover:text-white">
                     Calculate Your Savings
                   </a>
                 </div>
 
-                <p className="flex items-center gap-2 text-sm text-gray-300">
+                <p className="flex items-center gap-2 text-sm text-gray-600">
                   <HiOutlineShieldCheck className="w-5 h-5 text-sulnox-green" />
                   Trusted by drivers, businesses &amp; industries across Ghana
                 </p>
@@ -142,14 +143,14 @@ export default function Home() {
           </div>
 
           {/* Trust strip */}
-          <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/40 backdrop-blur-sm">
+          <div className="absolute bottom-0 left-0 right-0 border-t border-sulnox-green/20 bg-white/95 backdrop-blur-sm">
             <div className="max-w-7xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-6">
               {trustStrip.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <item.icon className="w-6 h-6 text-sulnox-green shrink-0" />
                   <div className="leading-tight">
-                    <p className="font-semibold text-sm">{item.label}</p>
-                    <p className="text-gray-400 text-xs hidden sm:block">{item.sub}</p>
+                    <p className="font-semibold text-sm text-ntl-navy">{item.label}</p>
+                    <p className="text-gray-500 text-xs hidden sm:block">{item.sub}</p>
                   </div>
                 </div>
               ))}
@@ -173,7 +174,9 @@ export default function Home() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {applications.map((item, idx) => (
                 <Reveal key={idx} delay={idx * 60} className="text-center bg-ntl-slate rounded-xl p-6 hover:shadow-md transition-shadow">
-                  <item.icon className="w-9 h-9 text-sulnox-green mx-auto mb-3" />
+                  <div className={`w-14 h-14 mx-auto mb-3 rounded-full flex items-center justify-center ${item.color}`}>
+                    <item.icon className="w-7 h-7" />
+                  </div>
                   <p className="text-sm font-semibold text-ntl-navy">{item.label}</p>
                 </Reveal>
               ))}
@@ -201,7 +204,7 @@ export default function Home() {
         </section>
 
         {/* Why Choose */}
-        <section className="section-padding bg-white">
+        <section className="pt-16 sm:pt-20 lg:pt-24 pb-8 bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <Reveal className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-bold text-ntl-navy mb-3">Why Choose SulNOxEco?</h2>

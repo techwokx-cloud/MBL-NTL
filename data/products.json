@@ -1,0 +1,9 @@
+[
+  { "id": "30ml", "name": "SulNOxEco 30ml", "sku": "30ML", "img": "/images/products/30ml Bottle.jpg", "price": 35.00, "badge": "For Trial Engines", "features": ["For trial engines", "Easy to use", "Improves combustion", "For all fuel types"], "link": "/products/250ml" },
+  { "id": "60ml", "name": "SulNOxEco 60ml", "sku": "60ML", "img": "/images/products/60ml-Bottle-.jpg", "price": 60.00, "badge": "Popular", "features": ["For motorcycles", "Improves mileage", "Reduces emissions", "Protects engine"], "link": "/products/250ml" },
+  { "id": "120ml", "name": "SulNOxEco 120ml", "sku": "120ML", "img": "/images/products/120 ml-Bottle..jpg", "price": 120.00, "badge": null, "features": ["For cars & pick-ups", "Better fuel economy", "Cleans injectors", "All petrol engines"], "link": "/products/250ml" },
+  { "id": "250ml", "name": "SulNOxEco 250ml", "sku": "250ML", "img": "/images/products/250 ml-Bottle..jpg", "price": 105.00, "badge": "Best Seller", "features": ["Improves fuel efficiency", "Reduces harmful emissions", "Cleans fuel system & injectors", "Suitable for all petrol engines"], "link": "/products/250ml" },
+  { "id": "1l", "name": "SulNOxEco 1 Litre", "sku": "1L", "img": "/images/products/1 Litre Bottle.jpg", "price": 320.00, "badge": null, "features": ["For commercial use", "High performance", "Reduces operating cost", "Petrol & diesel engines"], "link": "/products/4-5l" },
+  { "id": "4-5l", "name": "SulNOxEco 4.5 Litre", "sku": "4.5L", "img": "/images/products/4.5 Litre Galon.jpg", "price": 1960.00, "badge": "Value Pack", "features": ["For fleets & industry", "Maximum performance", "Lower emissions", "All diesel & petrol engines"], "link": "/products/4-5l" },
+  { "id": "25l", "name": "SulNOxEco 25 Litre", "sku": "25L", "img": "/images/products/25L Galon.jpg", "price": null, "badge": null, "features": ["For large fleets", "Bulk industrial use", "Marine & heavy equipment", "Custom pricing"], "link": "/products/4-5l" }
+]

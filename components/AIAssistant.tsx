@@ -127,14 +127,21 @@ export function AIAssistant() {
     <>
       {/* Chat Button */}
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-40 w-16 h-16 rounded-full bg-gradient-to-br from-ntl-blue to-sulnox-green text-white shadow-2xl hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
-          aria-label="Open AI Sales Agent"
-          title="Chat with SulNOx AI"
-        >
-          <FaRobot className="w-8 h-8" />
-        </button>
+        <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+          <div className="hidden sm:block bg-white shadow-lg rounded-lg px-4 py-2.5 text-sm font-semibold text-ntl-navy animate-bounce-slow">
+            Chat with SulNOx AI 👋
+            <span className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white rotate-45"></span>
+          </div>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="relative w-16 h-16 rounded-full bg-gradient-to-br from-ntl-blue to-sulnox-green text-white shadow-2xl hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
+            aria-label="Open AI Sales Agent"
+            title="Chat with SulNOx AI"
+          >
+            <span className="absolute inset-0 rounded-full bg-sulnox-green animate-ping opacity-30"></span>
+            <FaRobot className="relative w-8 h-8" />
+          </button>
+        </div>
       )}
 
       {/* Chat Window */}

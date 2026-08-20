@@ -4,23 +4,15 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { Reveal } from '@/components/Reveal';
 import { HiOutlineSparkles, HiOutlineTruck, HiOutlineShieldCheck, HiOutlineBadgeCheck } from 'react-icons/hi';
 import { FaWhatsapp } from 'react-icons/fa';
+import { getProducts, formatPrice } from '@/lib/products-data';
 
 export const metadata: Metadata = {
   title: 'Shop',
   description: 'Order genuine SulNOxEco Fuel Conditioner online in Ghana - available in sizes from 30ml to 25L.',
 };
 
-const products = [
-  { name: '30ml Bottle', sku: '30ML', img: '/images/products/30ml Bottle.jpg', price: 'GHC 35.00' },
-  { name: '60ml Bottle', sku: '60ML', img: '/images/products/60ml-Bottle-.jpg', price: 'GHC 60.00' },
-  { name: '120ml Bottle', sku: '120ML', img: '/images/products/120 ml-Bottle..jpg', price: 'GHC 120.00' },
-  { name: '250ml Bottle', sku: '250ML', img: '/images/products/250 ml-Bottle..jpg', price: 'GHC 105.00' },
-  { name: '1 Litre Bottle', sku: '1L', img: '/images/products/1 Litre Bottle.jpg', price: 'GHC 320.00' },
-  { name: '4.5 Litre Container', sku: '4.5L', img: '/images/products/4.5 Litre Galon.jpg', price: 'GHC 1,960.00' },
-  { name: '25 Litre Container', sku: '25L', img: '/images/products/25L Galon.jpg', price: 'Contact for Price' },
-];
-
 export default function Shop() {
+  const products = getProducts();
   const whatsappUrl = (name: string) =>
     `https://wa.me/233206769664?text=${encodeURIComponent(`Hello, I'd like to order SulNOxEco ${name}`)}`;
 
@@ -43,7 +35,7 @@ export default function Shop() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-4">
               {products.map((p, idx) => (
-                <Reveal key={idx} delay={(idx % 3) * 80}>
+                <Reveal key={p.id} delay={(idx % 3) * 80}>
                   <div className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 h-full flex flex-col">
                     <div className="relative h-56 bg-ntl-slate flex items-center justify-center p-6">
                       <img
@@ -58,7 +50,7 @@ export default function Shop() {
                     <div className="p-6 flex flex-col flex-grow text-center">
                       <h3 className="text-lg font-bold text-ntl-navy mb-1">{p.name}</h3>
                       <p className="text-xs text-gray-500 mb-3">Fuel Conditioner</p>
-                      <p className="text-xl font-bold text-ntl-navy mb-5">{p.price}</p>
+                      <p className="text-xl font-bold text-ntl-navy mb-5">{formatPrice(p.price)}</p>
                       <a
                         href={whatsappUrl(p.name)}
                         target="_blank"

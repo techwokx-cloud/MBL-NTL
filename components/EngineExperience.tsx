@@ -29,7 +29,7 @@ export function EngineExperience() {
   ];
 
   return (
-    <section className="section-padding bg-white">
+    <section className="pt-8 pb-16 sm:pb-20 lg:pb-24 bg-ntl-slate">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-sulnox-green font-semibold text-sm uppercase tracking-wide">Inside Your Engine</span>
