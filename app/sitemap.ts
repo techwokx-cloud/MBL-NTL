@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/branches`,
+      url: `${baseUrl}/outlets`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,

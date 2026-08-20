@@ -86,7 +86,7 @@ export function SiteFooter() {
             <ul className="space-y-3 text-sm">
               <li><Link href="/about" className="text-gray-300 hover:text-sulnox-green transition-colors">About Us</Link></li>
               <li><Link href="/how-it-works" className="text-gray-300 hover:text-sulnox-green transition-colors">How It Works</Link></li>
-              <li><Link href="/branches" className="text-gray-300 hover:text-sulnox-green transition-colors">Find a Branch</Link></li>
+              <li><Link href="/outlets" className="text-gray-300 hover:text-sulnox-green transition-colors">Find an Outlet</Link></li>
               <li><Link href="/become-a-sales-agent" className="text-gray-300 hover:text-sulnox-green transition-colors">Become a Sales Agent</Link></li>
             </ul>
           </div>

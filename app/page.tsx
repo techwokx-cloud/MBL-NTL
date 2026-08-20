@@ -67,7 +67,7 @@ const ctaStrip = [
     icon: FaMapMarkerAlt,
     label: 'Find an Outlet',
     sub: 'Locate SulNOxEco near you',
-    href: '/branches',
+    href: '/outlets',
     color: 'bg-ntl-blue hover:bg-ntl-blue/90',
   },
   {

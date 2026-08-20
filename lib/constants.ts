@@ -79,7 +79,7 @@ export const NAV_LINKS = [
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Products', href: '/products' },
   { label: 'Shop', href: '/shop' },
-  { label: 'Branches', href: '/branches' },
+  { label: 'Outlets', href: '/outlets' },
   { label: 'Support', href: '/support' },
 ];
 
@@ -94,7 +94,7 @@ export const FOOTER_LINKS = {
   company: [
     { label: 'About', href: '/about' },
     { label: 'How It Works', href: '/how-it-works' },
-    { label: 'Branches', href: '/branches' },
+    { label: 'Outlets', href: '/outlets' },
     { label: 'Become a Sales Agent', href: '/become-a-sales-agent' },
   ],
   support: [

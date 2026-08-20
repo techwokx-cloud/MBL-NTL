@@ -125,7 +125,7 @@ function generateLocalResponse(userInput: string): string {
     order:
       'You can order directly from our Shop page, or message us on WhatsApp for bulk/fleet orders.',
     delivery: 'We deliver across Accra and major cities in Ghana — message us on WhatsApp to confirm delivery timing for your area.',
-    contact: 'Reach us via WhatsApp (wa.me/233206769664), email (info@mbl-ntlsulnox.com), or visit one of our branches.',
+    contact: 'Reach us via WhatsApp (wa.me/233206769664), email (info@mbl-ntlsulnox.com), or visit one of our outlets.',
     agent: "Interested in becoming a SulNOxEco sales agent? Visit our Become a Sales Agent page to apply.",
     distributor: "Interested in becoming a SulNOxEco sales agent? Visit our Become a Sales Agent page to apply.",
   };

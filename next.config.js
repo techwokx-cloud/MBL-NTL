@@ -52,7 +52,13 @@ const nextConfig = {
 
   // Redirects (e.g., legacy URLs)
   async redirects() {
-    return [];
+    return [
+      {
+        source: '/branches',
+        destination: '/outlets',
+        permanent: true,
+      },
+    ];
   },
 
   // Rewrites (internal routing)

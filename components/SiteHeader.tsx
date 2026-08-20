@@ -22,7 +22,7 @@ const navLinks = [
   { label: 'Dosing Ratio', href: '/dosing-ratio' },
   { label: 'Savings Calculator', href: '/savings-calculator' },
   { label: 'Shop', href: '/shop' },
-  { label: 'Branches', href: '/branches' },
+  { label: 'Outlets', href: '/outlets' },
   { label: 'Support', href: '/support' },
 ];
 
