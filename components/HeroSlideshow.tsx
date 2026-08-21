@@ -8,14 +8,16 @@ interface Slide {
 }
 
 const slides: Slide[] = [
-  { image: '/images/hero/hero-vehicles-daytime.jpg', alt: 'SulNOxEco Fuel Conditioner - Trusted Across Fleets in Ghana' },
-  // Add more slides here as additional hero photography becomes available
+  { image: '/images/hero/hero-vehicles-no-text.jpg', alt: 'SulNOxEco Fuel Conditioner - Trusted Across Fleets in Ghana' },
+  { image: '/images/hero/hero-vehicles-with-text.jpg', alt: 'SulNOxEco Fuel Conditioner Range' },
 ];
 
 /**
- * Auto-rotating hero background slideshow. Currently ships with one slide;
- * built as a carousel so additional hero images can be dropped into the
- * `slides` array above without any other code changes.
+ * Auto-rotating hero background slideshow with a slow Ken Burns zoom on
+ * the active slide. object-position is biased toward the bottom so the
+ * vehicles/products (which sit in the lower two-thirds of the source
+ * photo) are never cropped — only sky at the very top is trimmed on
+ * narrow viewports.
  */
 export function HeroSlideshow() {
   const [active, setActive] = useState(0);
@@ -24,7 +26,7 @@ export function HeroSlideshow() {
     if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 7000);
     return () => clearInterval(timer);
   }, []);
 
@@ -35,8 +37,8 @@ export function HeroSlideshow() {
           key={slide.image}
           src={slide.image}
           alt={slide.alt}
-          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${
-            idx === active ? 'opacity-100' : 'opacity-0'
+          className={`absolute inset-0 w-full h-full object-cover object-bottom transition-opacity duration-1000 ${
+            idx === active ? 'opacity-100 animate-kenburns' : 'opacity-0'
           }`}
           loading={idx === 0 ? 'eager' : 'lazy'}
         />

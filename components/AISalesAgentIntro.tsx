@@ -41,7 +41,7 @@ export function AISalesAgentIntro() {
         {/* Robot mascot */}
         <Reveal delay={80} className="hidden lg:flex justify-center">
           <img
-            src="/images/site/sulnox-ai-robot.png"
+            src="/images/site/sulnox-ai-robot-transparent.png"
             alt="SulNOx AI Assistant"
             className="h-64 w-auto drop-shadow-2xl"
           />

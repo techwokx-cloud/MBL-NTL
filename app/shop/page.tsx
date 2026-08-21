@@ -2,71 +2,43 @@ import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { Reveal } from '@/components/Reveal';
+import { ShopGrid } from '@/components/ShopGrid';
 import { HiOutlineSparkles, HiOutlineTruck, HiOutlineShieldCheck, HiOutlineBadgeCheck } from 'react-icons/hi';
-import { FaWhatsapp } from 'react-icons/fa';
-import { getProducts, formatPrice } from '@/lib/products-data';
+import { getProducts } from '@/lib/products-data';
 
 export const metadata: Metadata = {
   title: 'Shop',
-  description: 'Order genuine SulNOxEco Fuel Conditioner online in Ghana - available in sizes from 30ml to 25L.',
+  description: 'Quick order genuine SulNOxEco Fuel Conditioner online in Ghana - select quantity and order directly via WhatsApp.',
 };
 
 export default function Shop() {
   const products = getProducts();
-  const whatsappUrl = (name: string) =>
-    `https://wa.me/233206769664?text=${encodeURIComponent(`Hello, I'd like to order SulNOxEco ${name}`)}`;
 
   return (
     <>
       <SiteHeader />
       <main className="flex-grow">
         {/* Hero */}
-        <section className="bg-ntl-slate py-10">
+        <section className="bg-gradient-to-r from-ntl-navy to-ntl-blue text-white py-10">
           <div className="max-w-7xl mx-auto px-6">
             <Reveal>
-              <h1 className="text-3xl sm:text-4xl font-bold text-ntl-navy mb-2">Shop SulNOxEco Products</h1>
-              <p className="text-gray-600">Order genuine SulNOxEco products online.</p>
+              <h1 className="text-3xl sm:text-4xl font-bold mb-2">Quick Order</h1>
+              <p className="text-gray-200">
+                Pick your quantities and order directly on WhatsApp — genuine SulNOxEco, delivered across Ghana.
+              </p>
             </Reveal>
           </div>
         </section>
 
-        {/* Products */}
+        {/* Quick order grid */}
         <section className="section-padding bg-white">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-4">
-              {products.map((p, idx) => (
-                <Reveal key={p.id} delay={(idx % 3) * 80}>
-                  <div className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 h-full flex flex-col">
-                    <div className="relative h-56 bg-ntl-slate flex items-center justify-center p-6">
-                      <img
-                        src={p.img}
-                        alt={p.name}
-                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <span className="absolute top-4 left-4 bg-sulnox-green text-white text-xs font-bold px-3 py-1 rounded-full">
-                        {p.sku}
-                      </span>
-                    </div>
-                    <div className="p-6 flex flex-col flex-grow text-center">
-                      <h3 className="text-lg font-bold text-ntl-navy mb-1">{p.name}</h3>
-                      <p className="text-xs text-gray-500 mb-3">Fuel Conditioner</p>
-                      <p className="text-xl font-bold text-ntl-navy mb-5">{formatPrice(p.price)}</p>
-                      <a
-                        href={whatsappUrl(p.name)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-auto flex items-center justify-center gap-2 bg-sulnox-green hover:bg-sulnox-green/90 text-white font-semibold text-sm py-2.5 rounded-lg transition-colors"
-                      >
-                        <FaWhatsapp className="w-4 h-4" />
-                        Add to Cart
-                      </a>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal className="text-center text-xs text-gray-500 mb-16">
-              Prices shown are indicative and subject to final confirmation. Message us on WhatsApp to complete your order.
+            <Reveal>
+              <ShopGrid products={products} />
+            </Reveal>
+            <Reveal className="text-center text-xs text-gray-500 mt-6 mb-16">
+              Prices shown are indicative and subject to final confirmation. Looking for full product details
+              and specs instead? Visit the <a href="/products" className="text-sulnox-green font-semibold hover:underline">Products</a> page.
             </Reveal>
 
             {/* Bulk Orders */}

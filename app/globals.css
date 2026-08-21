@@ -92,3 +92,23 @@ body {
 .animate-bounce-slow {
   animation: bounce-slow 2.5s ease-in-out infinite;
 }
+
+/* Slow Ken Burns zoom for hero slideshow images */
+@keyframes kenburns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.animate-kenburns {
+  animation: kenburns 8s ease-out forwards;
+}
+
+/* Subtle animated flow sweep for video/engine visuals */
+@keyframes flow-sweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-flow-sweep {
+  background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.35), transparent);
+  background-size: 200% 100%;
+  animation: flow-sweep 3s linear infinite;
+}
