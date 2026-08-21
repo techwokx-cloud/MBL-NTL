@@ -99,23 +99,29 @@ export default function Home() {
           <HeroSlideshow />
           <div className="relative max-w-7xl mx-auto px-6 py-16 sm:py-20 lg:py-24 w-full">
             <div className="max-w-2xl">
-              <Reveal>
+              <Reveal delay={0}>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.05] text-ntl-navy">
                   Make Every Drop <br className="hidden sm:block" />
                   of Fuel <span className="text-sulnox-green">Work Harder</span>
                 </h1>
+              </Reveal>
+              <Reveal delay={120}>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed max-w-xl">
                   SulNOxEco™ Fuel Conditioner optimizes combustion, reduces fuel consumption, lowers
                   emissions and protects your engine for the long term.
                 </p>
+              </Reveal>
 
+              <Reveal delay={220}>
                 <div className="inline-flex items-center gap-3 border border-ntl-blue/30 bg-white/90 shadow-sm rounded-lg px-4 py-3 mb-8">
-                  <span className="text-xl">🇬🇧</span>
+                  <span className="text-xl">🇬🇧🇬🇭</span>
                   <span className="text-sm font-medium text-ntl-navy">
-                    It is produced in the UK. Package and distribute in Ghana.
+                    SulNOx is produced in the UK. Packaged and distributed in Ghana.
                   </span>
                 </div>
+              </Reveal>
 
+              <Reveal delay={320}>
                 <div className="grid grid-cols-3 gap-4 mb-8 max-w-lg">
                   {heroFeatures.map((f, i) => (
                     <div key={i} className="flex flex-col items-start gap-2">
@@ -124,7 +130,9 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+              </Reveal>
 
+              <Reveal delay={420}>
                 <div className="flex flex-wrap gap-4 mb-6">
                   <a href="/how-it-works" className="btn-primary bg-sulnox-green hover:bg-sulnox-green/90">
                     See How It Works
@@ -232,7 +240,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
             <Reveal>
               <img
-                src="/images/products/d38b1048-9bde-40bc-8543-4f85ba16fb84.jpg"
+                src="/images/products/all-product-display.jpg"
                 alt="SulNOxEco in use"
                 className="rounded-2xl shadow-xl w-full object-cover"
               />

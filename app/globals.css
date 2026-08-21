@@ -65,19 +65,19 @@ body {
   @apply bg-gradient-to-r from-ntl-navy via-ntl-blue to-sulnox-green;
 }
 
-.btn-primary {
-  @apply inline-flex items-center justify-center rounded-lg bg-sulnox-green px-6 py-3 font-semibold text-white transition-all hover:bg-ntl-blue focus:outline-none focus:ring-2 focus:ring-sulnox-green focus:ring-offset-2;
-}
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-sulnox-green px-6 py-3 font-semibold text-white transition-all hover:bg-ntl-blue focus:outline-none focus:ring-2 focus:ring-sulnox-green focus:ring-offset-2;
+  }
 
-.btn-secondary {
-  @apply inline-flex items-center justify-center rounded-lg border-2 border-ntl-navy bg-transparent px-6 py-3 font-semibold text-ntl-navy transition-all hover:bg-ntl-navy hover:text-white focus:outline-none focus:ring-2 focus:ring-ntl-navy focus:ring-offset-2;
-}
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border-2 border-ntl-navy bg-transparent px-6 py-3 font-semibold text-ntl-navy transition-all hover:bg-ntl-navy hover:text-white focus:outline-none focus:ring-2 focus:ring-ntl-navy focus:ring-offset-2;
+  }
 
-.input-field {
-  @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 transition-colors focus:border-sulnox-green focus:outline-none focus:ring-2 focus:ring-sulnox-green focus:ring-offset-0;
+  .input-field {
+    @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 transition-colors focus:border-sulnox-green focus:outline-none focus:ring-2 focus:ring-sulnox-green focus:ring-offset-0;
+  }
 }
-
-/* Responsive utilities */
 @media (max-width: 640px) {
   .section-padding {
     @apply py-8 sm:py-12;

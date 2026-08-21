@@ -73,7 +73,7 @@ export function SiteHeader() {
               <img
                 src="/logo.png"
                 alt="MBL-NTL SulNOx Fuel Conditioner"
-                className="h-14 w-auto"
+                className="h-16 w-auto"
                 loading="eager"
               />
             </Link>

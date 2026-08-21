@@ -38,7 +38,7 @@ export function SiteFooter() {
         <div className="grid md:grid-cols-5 gap-10 mb-12">
           {/* Brand Column */}
           <div className="md:col-span-2">
-            <img src="/logo.png" alt="MBL-NTL SulNOx" className="h-12 w-auto mb-4 brightness-0 invert" />
+            <img src="/logo.png" alt="MBL-NTL SulNOx" className="h-14 w-auto mb-4 bg-white rounded-md p-1.5" />
             <p className="text-gray-300 text-sm leading-relaxed mb-2">
               MBL-NTLSULNOX is the sole distributor of SulNOxEco in Ghana. Produced in the UK, packaged and
               distributed locally.
