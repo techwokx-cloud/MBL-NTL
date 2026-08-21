@@ -114,7 +114,18 @@ export default function Home() {
 
               <Reveal delay={220}>
                 <div className="inline-flex items-center gap-3 border border-ntl-blue/30 bg-white/90 shadow-sm rounded-lg px-4 py-3 mb-8">
-                  <span className="text-xl">🇬🇧🇬🇭</span>
+                  <span className="flex items-center -space-x-1">
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f1ec-1f1e7.png"
+                      alt="UK flag"
+                      className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f1ec-1f1ed.png"
+                      alt="Ghana flag"
+                      className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    />
+                  </span>
                   <span className="text-sm font-medium text-ntl-navy">
                     SulNOx is produced in the UK. Packaged and distributed in Ghana.
                   </span>
@@ -182,8 +193,8 @@ export default function Home() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {applications.map((item, idx) => (
                 <Reveal key={idx} delay={idx * 60} className="text-center bg-ntl-slate rounded-xl p-6 hover:shadow-md transition-shadow">
-                  <div className={`w-14 h-14 mx-auto mb-3 rounded-full flex items-center justify-center ${item.color}`}>
-                    <item.icon className="w-7 h-7" />
+                  <div className={`w-20 h-20 mx-auto mb-3 rounded-full flex items-center justify-center ${item.color}`}>
+                    <item.icon className="w-10 h-10" />
                   </div>
                   <p className="text-sm font-semibold text-ntl-navy">{item.label}</p>
                 </Reveal>

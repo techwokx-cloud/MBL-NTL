@@ -9,7 +9,10 @@ interface Slide {
 
 const slides: Slide[] = [
   { image: '/images/hero/hero-vehicles-no-text.jpg', alt: 'SulNOxEco Fuel Conditioner - Trusted Across Fleets in Ghana' },
-  { image: '/images/hero/hero-vehicles-with-text.jpg', alt: 'SulNOxEco Fuel Conditioner Range' },
+  // Only the text-free photo is used here — the live headline below is
+  // rendered as real HTML. A version with baked-in text was tried
+  // previously and caused a duplicate/ghosted headline, so it's
+  // intentionally left out of this rotation.
 ];
 
 /**

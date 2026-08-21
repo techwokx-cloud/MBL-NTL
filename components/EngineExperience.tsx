@@ -1,4 +1,5 @@
-import { HiOutlineBeaker, HiOutlineFire, HiOutlineSparkles, HiOutlineShieldCheck } from 'react-icons/hi';
+import { HiOutlineBeaker, HiOutlineFire, HiOutlineSparkles, HiOutlineShieldCheck, HiOutlineCloud } from 'react-icons/hi';
+import { FaGasPump } from 'react-icons/fa';
 
 export function EngineExperience() {
   const steps = [
@@ -62,32 +63,45 @@ export function EngineExperience() {
           ))}
         </div>
 
-        {/* Additional Info */}
-        <div className="mt-16 rounded-xl bg-ntl-navy p-8 md:p-10">
-          <h3 className="text-2xl font-bold text-white mb-6">Performance Benefits</h3>
-          <ul className="grid md:grid-cols-3 gap-8">
-            <li className="flex gap-3">
-              <span className="text-sulnox-green text-2xl font-bold">&rarr;</span>
-              <div>
-                <p className="font-semibold text-white">Improved Fuel Economy</p>
-                <p className="text-sm text-gray-300">Cleaner, more complete combustion</p>
+        {/* Performance Benefits */}
+        <div className="mt-16 rounded-2xl bg-ntl-navy p-8 md:p-10 shadow-xl">
+          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-8">
+            Performance You Can Feel<span className="text-sulnox-green">.</span>
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8 md:gap-0 md:divide-x md:divide-white/10">
+            {[
+              {
+                icon: FaGasPump,
+                stat: '9 – 15%',
+                label: 'Fuel Savings',
+                desc: 'Improves fuel efficiency and helps you save more on every drive.',
+              },
+              {
+                icon: HiOutlineCloud,
+                stat: '90%',
+                label: 'Fewer Emissions',
+                desc: 'Reduces harmful exhaust emissions for a cleaner environment.',
+              },
+              {
+                icon: HiOutlineShieldCheck,
+                stat: '30%',
+                label: 'Better Engine Life',
+                desc: 'Protects and extends engine life for long-term performance.',
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-start gap-4 md:px-8 first:md:pl-0">
+                <div className="w-16 h-16 rounded-full border-2 border-white/20 flex items-center justify-center shrink-0">
+                  <item.icon className="w-7 h-7 text-sulnox-green" />
+                </div>
+                <div>
+                  <p className="font-bold text-white text-lg leading-snug">
+                    Up to <span className="text-sulnox-green">{item.stat}</span> {item.label}
+                  </p>
+                  <p className="text-sm text-gray-300 mt-1">{item.desc}</p>
+                </div>
               </div>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-sulnox-green text-2xl font-bold">&rarr;</span>
-              <div>
-                <p className="font-semibold text-white">Lower Emissions</p>
-                <p className="text-sm text-gray-300">Reduced GHG and particulate matter</p>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-sulnox-green text-2xl font-bold">&rarr;</span>
-              <div>
-                <p className="font-semibold text-white">Proven Reliability</p>
-                <p className="text-sm text-gray-300">Field-tested across marine, rail, road & industry</p>
-              </div>
-            </li>
-          </ul>
+            ))}
+          </div>
         </div>
       </div>
     </section>
