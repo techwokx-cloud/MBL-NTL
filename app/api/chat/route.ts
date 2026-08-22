@@ -113,28 +113,83 @@ async function getGroqResponse(
 }
 
 /**
- * Local fallback response generator — used only if GROQ_API_KEY is not set.
+ * Local fallback response generator — used only if GROQ_API_KEY is not set,
+ * or if the Groq call fails for any reason. Covers common real-world
+ * questions (symptoms, product selection, ordering) with genuinely useful
+ * answers grounded in what SulNOxEco actually does — not just a narrow
+ * keyword match with a generic catch-all.
  */
 function generateLocalResponse(userInput: string): string {
   const input = userInput.toLowerCase();
 
-  const responses: { [key: string]: string } = {
-    price: "For current pricing on any SulNOxEco size, message us on WhatsApp (wa.me/233206769664) and our sales team will help right away.",
-    dosing:
-      'Dosing depends on your fuel type and application. Check our Dosing Ratio page or the official Product Data Sheet on our Resources page for the exact recommended ratio.',
-    order:
-      'You can order directly from our Shop page, or message us on WhatsApp for bulk/fleet orders.',
-    delivery: 'We deliver across Accra and major cities in Ghana — message us on WhatsApp to confirm delivery timing for your area.',
-    contact: 'Reach us via WhatsApp (wa.me/233206769664), email (info@mbl-ntlsulnox.com), or visit one of our outlets.',
-    agent: "Interested in becoming a SulNOxEco sales agent? Visit our Become a Sales Agent page to apply.",
-    distributor: "Interested in becoming a SulNOxEco sales agent? Visit our Become a Sales Agent page to apply.",
-  };
+  const rules: { keywords: string[]; response: string }[] = [
+    {
+      keywords: ['black smoke', 'smoking', 'smokes', 'smoke', 'exhaust smoke'],
+      response:
+        "Excess smoke is usually a sign of incomplete combustion and carbon build-up. SulNOxEco conditions the fuel for a cleaner, more complete burn, which typically reduces smoke and emissions over a few tanks of use — it won't fix a mechanical fault, but it's exactly the kind of issue it helps with. For a petrol/diesel car, the 120ml or 250ml size is a good starting point. Want a specific recommendation, or should I connect you with our team on WhatsApp?",
+    },
+    {
+      keywords: ['rough idle', 'idling rough', 'stalling', 'stall', 'hesitat'],
+      response:
+        "Rough idling or hesitation often points to carbon deposits on injectors or valves. SulNOxEco cleans the fuel system as it burns, which can smooth this out over time. If it's a sudden or severe issue, it's worth having a mechanic check it too — but adding SulNOxEco at your next fill-up is a good, low-cost first step.",
+    },
+    {
+      keywords: ['knock', 'knocking', 'pinging'],
+      response:
+        "Engine knock can have several causes, and a fuel conditioner alone may not resolve a mechanical issue — but SulNOxEco's cleaner combustion can help with knock caused by carbon build-up specifically. If it's a new or worsening noise, please also have it checked by a mechanic. Want help picking the right size to try?",
+    },
+    {
+      keywords: ['poor mileage', 'fuel economy', 'using too much fuel', 'consuming', 'consumption', 'mileage'],
+      response:
+        'SulNOxEco is built for exactly this — it improves combustion efficiency, which typically means better mileage and lower fuel spend over time. Try our Savings Calculator (/savings-calculator) to see an estimate for your vehicle, or tell me your fuel type and daily usage and I can point you to the right product size.',
+    },
+    {
+      keywords: ['hard to start', 'wont start', "won't start", 'difficult to start', 'starting problem'],
+      response:
+        "Hard starting can come from several causes, including fuel system deposits. SulNOxEco helps by keeping the fuel system and injectors cleaner, which can improve starting over a few tanks — but if it's an electrical or battery issue, a mechanic's diagnosis is the right first step. Happy to help you pick a product either way.",
+    },
+    {
+      keywords: ['price', 'cost', 'how much', 'ghc'],
+      response:
+        'For current pricing on any SulNOxEco size, message us on WhatsApp (wa.me/233206769664) and our sales team will help right away — or check the Shop page for indicative prices.',
+    },
+    {
+      keywords: ['dosing', 'dose', 'how much to add', 'ratio', 'how many ml'],
+      response:
+        'Dosing depends on your fuel type and application. Check our Dosing Ratio page or the official Product Data Sheet on our Resources page for the exact recommended ratio for your engine.',
+    },
+    {
+      keywords: ['order', 'buy', 'purchase', 'where can i get'],
+      response: 'You can order directly from our Shop page, or message us on WhatsApp for bulk/fleet orders.',
+    },
+    {
+      keywords: ['deliver', 'shipping'],
+      response: 'We deliver across Accra and major cities in Ghana — message us on WhatsApp to confirm delivery timing for your area.',
+    },
+    {
+      keywords: ['contact', 'phone number', 'email', 'reach you'],
+      response: 'Reach us via WhatsApp (wa.me/233206769664), email (info@mbl-ntlsulnox.com), or visit one of our outlets.',
+    },
+    {
+      keywords: ['agent', 'distributor', 'partner with', 'become a'],
+      response: 'Interested in becoming a SulNOxEco sales agent? Visit our Become a Sales Agent page to apply.',
+    },
+    {
+      keywords: ['which product', 'what size', 'recommend', 'right for me', 'suitable'],
+      response:
+        "Happy to help you pick the right size. As a rough guide: 30-120ml suits motorcycles and small engines, 250ml-1L suits cars and light commercial vehicles, and 4.5L-25L suits fleets and industrial use. What are you looking to treat — a car, generator, fleet, or something else?",
+    },
+    {
+      keywords: ['hi', 'hello', 'hey', 'good morning', 'good afternoon'],
+      response: "Hi there! I'm SulNOx AI. I can help with product selection, dosing guidance, fuel savings estimates, or connecting you with our team. What's going on with your vehicle or equipment?",
+    },
+  ];
 
-  for (const [keyword, response] of Object.entries(responses)) {
-    if (input.includes(keyword)) {
-      return response;
+  for (const rule of rules) {
+    if (rule.keywords.some((kw) => input.includes(kw))) {
+      return rule.response;
     }
   }
 
-  return "Thanks for your question! I can help with product selection, dosing guidance, ordering and support. What would you like to know?";
+  return "I can help with engine symptoms (smoke, rough running, poor mileage), product selection, dosing, or ordering — could you tell me a bit more about what's going on, or what you'd like to know? You can also reach our team directly on WhatsApp (wa.me/233206769664).";
 }
