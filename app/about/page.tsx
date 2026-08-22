@@ -41,7 +41,7 @@ export default function About() {
           <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start mb-14">
             <Reveal>
               <img
-                src="/images/site/ntl-storefront.jpg"
+                src="/images/site/ntl-storefront-new.jpg"
                 alt="MBL-NTL SulNOxEco storefront in Ghana"
                 className="w-full h-auto rounded-2xl shadow-lg object-cover"
               />

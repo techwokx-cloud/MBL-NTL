@@ -60,7 +60,9 @@ export default function Support() {
                     <FaMapMarkerAlt className="w-5 h-5 text-sulnox-green mt-1 shrink-0" />
                     <div>
                       <p className="font-bold mb-1">Visit Us</p>
-                      <p className="text-sm text-gray-300">MBL-NTL Head Office, Accra, Ghana</p>
+                      <p className="text-sm text-gray-300">Mulberry Lane Limited (MBL-NTL SulNOx)</p>
+                      <p className="text-sm text-gray-300">129 Haatso Road, Haatso, Ga East District, Accra</p>
+                      <p className="text-sm text-gray-300">P.O. Box LG 206, Legon, Accra-Ghana</p>
                     </div>
                   </div>
                 </div>

@@ -113,6 +113,9 @@ export default function RootLayout({
                 'Sole authorised distributor of SulNOxEco Fuel Conditioner in Ghana.',
               address: {
                 '@type': 'PostalAddress',
+                streetAddress: '129 Haatso Road, Haatso, Ga East District',
+                addressLocality: 'Accra',
+                postOfficeBoxNumber: 'P.O. Box LG 206, Legon',
                 addressCountry: 'GH',
               },
               sameAs: [],

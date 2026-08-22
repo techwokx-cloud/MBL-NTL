@@ -8,24 +8,28 @@ export function EngineExperience() {
       icon: HiOutlineBeaker,
       title: 'Added to Fuel',
       description: 'SulNOxEco is dosed directly into the fuel tank, blending seamlessly with diesel, petrol or biofuel.',
+      image: '/images/site/step1-fuel.jpg',
     },
     {
       number: '02',
       icon: HiOutlineSparkles,
       title: 'Conditions the Fuel',
       description: 'The organic formula conditions and emulsifies the fuel, breaking down carbon deposits already in the system.',
+      image: '/images/site/step2-beaker.jpg',
     },
     {
       number: '03',
       icon: HiOutlineFire,
       title: 'Improved Combustion',
       description: 'Fuel burns more completely in the engine, releasing more of its available energy with less waste.',
+      image: '/images/site/step3-piston.jpg',
     },
     {
       number: '04',
       icon: HiOutlineShieldCheck,
       title: 'Cleaner, Efficient Engine',
       description: 'The result: lower fuel consumption, reduced emissions, and a cleaner, better-protected engine over time.',
+      image: '/images/site/step4-truck.jpg',
     },
   ];
 
@@ -44,13 +48,18 @@ export function EngineExperience() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, idx) => (
             <div key={idx} className="relative">
-              <div className="h-full rounded-xl border border-ntl-blue/15 bg-ntl-slate p-8 hover:shadow-lg transition-shadow">
-                <div className="flex items-center justify-between mb-5">
-                  <span className="text-4xl font-bold text-ntl-blue/15">{step.number}</span>
-                  <step.icon className="w-9 h-9 text-sulnox-green" />
+              <div className="h-full rounded-xl overflow-hidden border border-ntl-blue/15 bg-white hover:shadow-lg transition-shadow">
+                <div className="h-40 w-full">
+                  <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
                 </div>
-                <h3 className="text-lg font-bold text-ntl-navy mb-2">{step.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-3xl font-bold text-ntl-blue/20">{step.number}</span>
+                    <step.icon className="w-8 h-8 text-sulnox-green" />
+                  </div>
+                  <h3 className="text-lg font-bold text-ntl-navy mb-2">{step.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                </div>
               </div>
 
               {idx < steps.length - 1 && (

@@ -122,3 +122,12 @@ body {
 .animate-spray {
   animation: spray 1.4s ease-out infinite;
 }
+
+/* Animated underline draw-in for hero headline accent */
+@keyframes draw-underline {
+  from { stroke-dasharray: 220; stroke-dashoffset: 220; }
+  to { stroke-dasharray: 220; stroke-dashoffset: 0; }
+}
+.animate-draw-underline {
+  animation: draw-underline 1s ease-out 0.6s both;
+}

@@ -5,6 +5,7 @@ import { EngineExperience } from '@/components/EngineExperience';
 import { Reveal } from '@/components/Reveal';
 import { HeroSlideshow } from '@/components/HeroSlideshow';
 import { AISalesAgentIntro } from '@/components/AISalesAgentIntro';
+import { KeyClientsStrip } from '@/components/KeyClientsStrip';
 import {
   HiOutlineCurrencyDollar,
   HiOutlineCloud,
@@ -12,11 +13,8 @@ import {
   HiOutlineTrendingUp,
   HiOutlineChip,
   HiOutlineBeaker,
-  HiOutlineTruck,
-  HiOutlineLightningBolt,
 } from 'react-icons/hi';
-import { GiFarmTractor, GiCrane, GiFactory, GiMining } from 'react-icons/gi';
-import { FaWhatsapp, FaCheckCircle, FaShip, FaCar, FaMapMarkerAlt, FaHandshake, FaBoxes } from 'react-icons/fa';
+import { FaWhatsapp, FaCheckCircle, FaMapMarkerAlt, FaHandshake, FaBoxes } from 'react-icons/fa';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -45,14 +43,14 @@ const whyChoose = [
 ];
 
 const applications = [
-  { icon: FaCar, label: 'Cars & SUVs', color: 'bg-blue-50 text-blue-600' },
-  { icon: HiOutlineTruck, label: 'Trucks & Buses', color: 'bg-amber-50 text-amber-600' },
-  { icon: HiOutlineLightningBolt, label: 'Generators', color: 'bg-yellow-50 text-yellow-600' },
-  { icon: GiCrane, label: 'Construction', color: 'bg-orange-50 text-orange-600' },
-  { icon: GiFarmTractor, label: 'Agriculture', color: 'bg-lime-50 text-lime-700' },
-  { icon: FaShip, label: 'Marine', color: 'bg-cyan-50 text-cyan-600' },
-  { icon: GiFactory, label: 'Industrial', color: 'bg-slate-100 text-slate-600' },
-  { icon: GiMining, label: 'Mining', color: 'bg-stone-100 text-stone-600' },
+  { image: '/images/applications/cars.jpg', label: 'Cars & SUVs' },
+  { image: '/images/applications/trucks-buses.jpg', label: 'Trucks & Buses' },
+  { image: '/images/applications/generators.jpg', label: 'Generators' },
+  { image: '/images/applications/construction.jpg', label: 'Construction' },
+  { image: '/images/applications/agriculture.jpg', label: 'Agriculture' },
+  { image: '/images/applications/marine.jpg', label: 'Marine' },
+  { image: '/images/applications/industrial.jpg', label: 'Industrial' },
+  { image: '/images/applications/mining.jpg', label: 'Mining' },
 ];
 
 const ctaStrip = [
@@ -102,7 +100,25 @@ export default function Home() {
               <Reveal delay={0}>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.05] text-ntl-navy">
                   Make Every Drop <br className="hidden sm:block" />
-                  of Fuel <span className="text-sulnox-green">Work Harder</span>
+                  of Fuel{' '}
+                  <span className="relative inline-block text-sulnox-green">
+                    Work Harder
+                    <svg
+                      className="absolute -bottom-1 left-0 w-full"
+                      viewBox="0 0 200 12"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M2 8 Q 50 2, 100 8 T 198 8"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        className="animate-draw-underline"
+                      />
+                    </svg>
+                  </span>
                 </h1>
               </Reveal>
               <Reveal delay={120}>
@@ -180,6 +196,9 @@ export default function Home() {
         {/* Meet SulNOx AI */}
         <AISalesAgentIntro />
 
+        {/* Key Clients & Partners */}
+        <KeyClientsStrip />
+
         {/* Applications */}
         <section className="section-padding bg-white">
           <div className="max-w-7xl mx-auto px-6">
@@ -192,11 +211,11 @@ export default function Home() {
             </Reveal>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {applications.map((item, idx) => (
-                <Reveal key={idx} delay={idx * 60} className="text-center bg-ntl-slate rounded-xl p-6 hover:shadow-md transition-shadow">
-                  <div className={`w-20 h-20 mx-auto mb-3 rounded-full flex items-center justify-center ${item.color}`}>
-                    <item.icon className="w-10 h-10" />
+                <Reveal key={idx} delay={idx * 60} className="text-center bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-gray-100">
+                  <div className="h-28 w-full">
+                    <img src={item.image} alt={item.label} className="w-full h-full object-cover" />
                   </div>
-                  <p className="text-sm font-semibold text-ntl-navy">{item.label}</p>
+                  <p className="text-sm font-semibold text-ntl-navy py-3">{item.label}</p>
                 </Reveal>
               ))}
             </div>
