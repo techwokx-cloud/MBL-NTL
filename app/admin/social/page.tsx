@@ -83,10 +83,10 @@ export default function AdminSocial() {
         ))}
       </div>
 
-      <div className="mt-6 bg-amber-50 border-l-4 border-amber-400 rounded-lg p-5 max-w-xl">
+      <div className="mt-6 bg-blue-50 border-l-4 border-blue-400 rounded-lg p-5 max-w-xl">
         <p className="text-sm text-gray-700">
-          <strong>Next step:</strong> these links are saved here but not yet wired into the live header/footer
-          social icons — that's a quick follow-up once you confirm the real account URLs.
+          <strong>Live:</strong> these links now feed the footer's social icons directly. Leave a field blank
+          to fall back to the default (YouTube links to your Videos page; others hide their hover state until set).
         </p>
       </div>
     </div>

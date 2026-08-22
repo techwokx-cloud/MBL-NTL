@@ -4,6 +4,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { Reveal } from '@/components/Reveal';
 import { HiOutlineTrendingUp, HiOutlineCash, HiOutlineSpeakerphone, HiOutlineTruck, HiOutlineUserGroup } from 'react-icons/hi';
 import { FaCheckCircle } from 'react-icons/fa';
+import { SalesAgentForm } from '@/components/SalesAgentForm';
 
 export const metadata: Metadata = {
   title: 'Become a Sales Agent',
@@ -99,87 +100,7 @@ export default function BecomeSalesAgent() {
               <h2 className="text-2xl sm:text-3xl font-bold text-ntl-navy mb-2">Sales Agent Application</h2>
               <p className="text-gray-600 mb-8">Tell us about yourself and your business — our team will follow up shortly.</p>
 
-              <form
-                action="https://wa.me/233206769664"
-                target="_blank"
-                className="space-y-5"
-              >
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-ntl-navy mb-1.5">Full Name *</label>
-                    <input
-                      type="text"
-                      required
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sulnox-green"
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-ntl-navy mb-1.5">Company Name</label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sulnox-green"
-                      placeholder="If applicable"
-                    />
-                  </div>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-ntl-navy mb-1.5">Phone Number *</label>
-                    <input
-                      type="tel"
-                      required
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sulnox-green"
-                      placeholder="0XX XXX XXXX"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-ntl-navy mb-1.5">Email Address *</label>
-                    <input
-                      type="email"
-                      required
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sulnox-green"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-ntl-navy mb-1.5">Region *</label>
-                  <select
-                    required
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sulnox-green"
-                  >
-                    <option value="">Select your region</option>
-                    <option>Greater Accra</option>
-                    <option>Ashanti</option>
-                    <option>Western</option>
-                    <option>Eastern</option>
-                    <option>Central</option>
-                    <option>Northern</option>
-                    <option>Volta</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-ntl-navy mb-1.5">Tell Us About Your Business</label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sulnox-green"
-                    placeholder="Current business, customer base, target market, etc."
-                  />
-                </div>
-                <label className="flex items-start gap-2.5 text-sm text-gray-600">
-                  <input type="checkbox" required className="mt-1" />
-                  I agree to be contacted by the SulNOxEco Ghana sales team regarding this application.
-                </label>
-                <button type="submit" className="btn-primary w-full sm:w-auto">
-                  Submit Application
-                </button>
-                <p className="text-xs text-gray-500">
-                  This form opens WhatsApp to send your application directly to our sales team. A connected form
-                  submission backend can be added on request.
-                </p>
-              </form>
+              <SalesAgentForm />
             </Reveal>
           </div>
         </section>

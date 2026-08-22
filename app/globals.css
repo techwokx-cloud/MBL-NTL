@@ -112,3 +112,13 @@ body {
   background-size: 200% 100%;
   animation: flow-sweep 3s linear infinite;
 }
+
+/* Injector spray particle animation */
+@keyframes spray {
+  0% { transform-origin: top center; transform: scaleY(0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform-origin: top center; transform: scaleY(1) translateY(20px); opacity: 0; }
+}
+.animate-spray {
+  animation: spray 1.4s ease-out infinite;
+}

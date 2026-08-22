@@ -1,5 +1,7 @@
 import { getProducts } from '@/lib/products-data';
 import Link from 'next/link';
+import fs from 'fs';
+import path from 'path';
 import {
   HiOutlineCube,
   HiOutlineCurrencyDollar,
@@ -8,14 +10,24 @@ import {
   HiOutlineArrowRight,
 } from 'react-icons/hi';
 
+function getLeadsCount(): number {
+  try {
+    const raw = fs.readFileSync(path.join(process.cwd(), 'data', 'leads.json'), 'utf-8');
+    return JSON.parse(raw).length;
+  } catch {
+    return 0;
+  }
+}
+
 export default function AdminOverview() {
   const products = getProducts();
   const pricedCount = products.filter((p) => p.price !== null).length;
+  const leadsCount = getLeadsCount();
 
   const cards = [
     { icon: HiOutlineCube, label: 'Total Products', value: products.length, href: '/admin/pricing' },
     { icon: HiOutlineCurrencyDollar, label: 'Products Priced', value: `${pricedCount} / ${products.length}`, href: '/admin/pricing' },
-    { icon: HiOutlineUserGroup, label: 'Sales Agent Leads', value: '—', href: '/admin/leads' },
+    { icon: HiOutlineUserGroup, label: 'Sales Agent Leads', value: leadsCount, href: '/admin/leads' },
     { icon: HiOutlineShare, label: 'Social Channels', value: '4', href: '/admin/social' },
   ];
 

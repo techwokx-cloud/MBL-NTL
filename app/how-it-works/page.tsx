@@ -14,6 +14,7 @@ import {
   HiOutlineCurrencyDollar,
 } from 'react-icons/hi';
 import { FaWhatsapp, FaCheckCircle, FaTimesCircle, FaPhone, FaEnvelope } from 'react-icons/fa';
+import { InjectorSequence } from '@/components/InjectorSequence';
 
 export const metadata: Metadata = {
   title: 'How It Works',
@@ -201,22 +202,8 @@ export default function HowItWorks() {
               </a>
             </Reveal>
 
-            <Reveal delay={100} className="lg:col-span-2 grid grid-cols-3 gap-4">
-              {[
-                { label: 'Dirty Injector', tone: 'bg-gray-700' },
-                { label: 'Cleaning in Progress', tone: 'bg-ntl-blue' },
-                { label: 'Clean Injector', tone: 'bg-sulnox-green' },
-              ].map((stage, idx) => (
-                <div key={idx} className={`${stage.tone} rounded-xl aspect-square flex flex-col items-center justify-center p-4 text-white relative overflow-hidden`}>
-                  <div className="w-2 h-16 bg-white/30 rounded-full mb-3 relative overflow-hidden">
-                    <div
-                      className="absolute bottom-0 left-0 right-0 bg-white/80 animate-pulse"
-                      style={{ height: `${30 + idx * 35}%` }}
-                    />
-                  </div>
-                  <p className="text-xs font-semibold text-center">{stage.label}</p>
-                </div>
-              ))}
+            <Reveal delay={100} className="lg:col-span-2">
+              <InjectorSequence />
             </Reveal>
           </div>
         </section>

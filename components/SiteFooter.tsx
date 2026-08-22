@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import { HiOutlineSparkles, HiOutlineCog, HiOutlineCash, HiOutlineGlobeAlt } from 'react-icons/hi';
@@ -8,6 +9,15 @@ export function SiteFooter() {
   const currentYear = new Date().getFullYear();
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+233206769664';
   const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}`;
+
+  const [social, setSocial] = useState({ facebook: '', instagram: '', linkedin: '', youtube: '' });
+
+  useEffect(() => {
+    fetch('/api/social')
+      .then((res) => res.json())
+      .then(setSocial)
+      .catch(() => {});
+  }, []);
 
   const trustBadges = [
     { icon: HiOutlineSparkles, label: '100% Organic', sub: 'Fuel Conditioner' },
@@ -45,16 +55,16 @@ export function SiteFooter() {
             </p>
             <p className="text-gray-400 text-xs mb-5">SulNOxEco is a trademark of Nationwide Technologies Ltd.</p>
             <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-sulnox-green flex items-center justify-center transition-colors" aria-label="Facebook">
+              <a href={social.facebook || '#'} target={social.facebook ? '_blank' : undefined} rel={social.facebook ? 'noopener noreferrer' : undefined} className="w-9 h-9 rounded-full bg-white/10 hover:bg-sulnox-green flex items-center justify-center transition-colors" aria-label="Facebook">
                 <FaFacebookF className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-sulnox-green flex items-center justify-center transition-colors" aria-label="Instagram">
+              <a href={social.instagram || '#'} target={social.instagram ? '_blank' : undefined} rel={social.instagram ? 'noopener noreferrer' : undefined} className="w-9 h-9 rounded-full bg-white/10 hover:bg-sulnox-green flex items-center justify-center transition-colors" aria-label="Instagram">
                 <FaInstagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-sulnox-green flex items-center justify-center transition-colors" aria-label="LinkedIn">
+              <a href={social.linkedin || '#'} target={social.linkedin ? '_blank' : undefined} rel={social.linkedin ? 'noopener noreferrer' : undefined} className="w-9 h-9 rounded-full bg-white/10 hover:bg-sulnox-green flex items-center justify-center transition-colors" aria-label="LinkedIn">
                 <FaLinkedinIn className="w-4 h-4" />
               </a>
-              <a href="/videos" className="w-9 h-9 rounded-full bg-white/10 hover:bg-sulnox-green flex items-center justify-center transition-colors" aria-label="YouTube">
+              <a href={social.youtube || '/videos'} target={social.youtube ? '_blank' : undefined} rel={social.youtube ? 'noopener noreferrer' : undefined} className="w-9 h-9 rounded-full bg-white/10 hover:bg-sulnox-green flex items-center justify-center transition-colors" aria-label="YouTube">
                 <FaYoutube className="w-4 h-4" />
               </a>
               <a
