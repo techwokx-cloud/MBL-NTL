@@ -48,15 +48,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
       );
     }
 
-    const groqKey = process.env.GROQ_API_KEY;
-    let reply: string;
-
-    if (groqKey) {
-      reply = await getGroqResponse(message, history, groqKey);
-    } else {
-      // Fallback while no GROQ_API_KEY is configured
-      reply = generateLocalResponse(message);
-    }
+    const reply = await getChatReply(message, history);
 
     return NextResponse.json(
       {
@@ -75,16 +67,42 @@ export async function POST(request: NextRequest): Promise<NextResponse<ChatRespo
   }
 }
 
+type Turn = { role: 'user' | 'assistant'; content: string };
+
 /**
- * Groq API integration (OpenAI-compatible chat completions endpoint).
- * Requires GROQ_API_KEY environment variable on Render.
- * Model: llama-3.3-70b-versatile — fast inference, strong quality for this use case.
+ * Provider fallback chain: tries each configured AI provider in order until
+ * one succeeds, then falls back to the local rule-based responder as a last
+ * resort. Add/remove providers by setting or unsetting their env var on
+ * Render — no code changes needed to enable one you didn't have before.
+ *
+ * Order: Groq (fastest/cheapest) -> Gemini -> Anthropic Claude -> local rules
  */
-async function getGroqResponse(
-  message: string,
-  history: { role: 'user' | 'assistant'; content: string }[],
-  apiKey: string
-): Promise<string> {
+async function getChatReply(message: string, history: Turn[]): Promise<string> {
+  const providers: { name: string; key: string | undefined; call: (key: string) => Promise<string> }[] = [
+    { name: 'Groq', key: process.env.GROQ_API_KEY, call: (key) => getGroqResponse(message, history, key) },
+    { name: 'Gemini', key: process.env.GEMINI_API_KEY, call: (key) => getGeminiResponse(message, history, key) },
+    { name: 'Anthropic', key: process.env.ANTHROPIC_API_KEY, call: (key) => getAnthropicResponse(message, history, key) },
+  ];
+
+  for (const provider of providers) {
+    if (!provider.key) continue;
+    try {
+      const reply = await provider.call(provider.key);
+      if (reply) return reply;
+    } catch (err) {
+      console.error(`${provider.name} API failed, trying next provider:`, err);
+    }
+  }
+
+  // No provider configured or all failed — local rule-based fallback.
+  return generateLocalResponse(message);
+}
+
+/**
+ * Groq (OpenAI-compatible chat completions endpoint).
+ * Requires GROQ_API_KEY on Render. Fast, cheap inference.
+ */
+async function getGroqResponse(message: string, history: Turn[], apiKey: string): Promise<string> {
   const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -95,7 +113,7 @@ async function getGroqResponse(
       model: 'llama-3.3-70b-versatile',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
-        ...history.slice(-6), // keep last few turns for context
+        ...history.slice(-6),
         { role: 'user', content: message },
       ],
       max_tokens: 300,
@@ -104,20 +122,83 @@ async function getGroqResponse(
   });
 
   if (!response.ok) {
-    console.error('Groq API error:', response.status, await response.text());
-    return generateLocalResponse(message);
+    throw new Error(`Groq ${response.status}: ${await response.text()}`);
   }
-
   const data = await response.json();
-  return data.choices?.[0]?.message?.content?.trim() || generateLocalResponse(message);
+  const reply = data.choices?.[0]?.message?.content?.trim();
+  if (!reply) throw new Error('Groq returned empty reply');
+  return reply;
 }
 
 /**
- * Local fallback response generator — used only if GROQ_API_KEY is not set,
- * or if the Groq call fails for any reason. Covers common real-world
+ * Google Gemini (generateContent endpoint).
+ * Requires GEMINI_API_KEY on Render — get one free at aistudio.google.com/apikey.
+ */
+async function getGeminiResponse(message: string, history: Turn[], apiKey: string): Promise<string> {
+  const contents = [
+    ...history.slice(-6).map((turn) => ({
+      role: turn.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: turn.content }],
+    })),
+    { role: 'user', parts: [{ text: message }] },
+  ];
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        contents,
+        generationConfig: { maxOutputTokens: 300, temperature: 0.4 },
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`Gemini ${response.status}: ${await response.text()}`);
+  }
+  const data = await response.json();
+  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+  if (!reply) throw new Error('Gemini returned empty reply');
+  return reply;
+}
+
+/**
+ * Anthropic Claude (Messages API).
+ * Requires ANTHROPIC_API_KEY on Render — get one at console.anthropic.com.
+ */
+async function getAnthropicResponse(message: string, history: Turn[], apiKey: string): Promise<string> {
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 300,
+      system: SYSTEM_PROMPT,
+      messages: [...history.slice(-6), { role: 'user', content: message }],
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Anthropic ${response.status}: ${await response.text()}`);
+  }
+  const data = await response.json();
+  const reply = data.content?.[0]?.text?.trim();
+  if (!reply) throw new Error('Anthropic returned empty reply');
+  return reply;
+}
+
+/**
+ * Local fallback response generator — used only if no AI provider is
+ * configured, or all configured providers fail. Covers common real-world
  * questions (symptoms, product selection, ordering) with genuinely useful
- * answers grounded in what SulNOxEco actually does — not just a narrow
- * keyword match with a generic catch-all.
+ * answers grounded in what SulNOxEco actually does.
  */
 function generateLocalResponse(userInput: string): string {
   const input = userInput.toLowerCase();
